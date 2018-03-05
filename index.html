@@ -2,6 +2,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="static/styles/font-awesome.min.css">
   <link rel="stylesheet" href="static/styles/bootstrap.min.css">
@@ -33,43 +34,41 @@
     }
 
     const Repo = (repo) => {
-      return div({class: 'col-sm-6 col-md-4 col-centered repository'}, [
+      return div({class: 'mx-auto col-centered repository'}, [
         div({class: 'col-md-12'}, [
           div({class: 'row repository-data'}, [
-            div({class: 'col-xs-8 col-md-8'}, [
+            div({class: 'repository-desc-container'}, [
               h2([a({href: repo.html_url}, repo.name)]),
               p({class: 'repository-description'}, [
                 i(repo.description)
               ])
             ]),
-            div({class: 'col-xs-4 col-md-4'}, [
-              div({class: 'row repository-stats'}, [
-                p({class: 'col-xs-12 col-md-12'}, [
-                  i({class: 'stat-icon fa fa-pencil'}),
-                  span(repo.updated_at)
-                ]),
-                p({class: 'col-xs-12 col-md-12'}, [
-                  i({class: 'stat-icon fa fa-tags'}),
-                  span(repo.language)
-                ]),
-                p({class: 'col-xs-12 col-md-12'}, [
-                  i({class: 'stat-icon fa fa-star'}),
-                  span(repo.stargazers_count),
-                  span(' '),
-                  span(plurality(repo.stargazers_count, 'star'))
-                ]),
-                p({class: 'col-xs-12 col-md-12'}, [
-                  i({class: 'stat-icon fa fa-chain'}),
-                  span(repo.forks_count),
-                  span(' '),
-                  span(plurality(repo.forks_count, 'fork'))
-                ]),
-                p({class: 'col-xs-12 col-md-12'}, [
-                  i({class: 'stat-icon fa fa-users'}),
-                  span(repo.contributor_count),
-                  span(' '),
-                  span(plurality(repo.contributor_count, 'contributor'))
-                ])
+            div({class: 'row repository-stats'}, [
+              p([
+                i({class: 'stat-icon fa fa-pencil'}),
+                repo.updated_at
+              ]),
+              p([
+                i({class: 'stat-icon fa fa-tags'}),
+                repo.language
+              ]),
+              p([
+                i({class: 'stat-icon fa fa-star'}),
+                repo.stargazers_count,
+                ' ',
+                plurality(repo.stargazers_count, 'star')
+              ]),
+              p([
+                i({class: 'stat-icon fa fa-chain'}),
+                repo.forks_count,
+                ' ',
+                plurality(repo.forks_count, 'fork')
+              ]),
+              p([
+                i({class: 'stat-icon fa fa-users'}),
+                repo.contributor_count,
+                ' ',
+                plurality(repo.contributor_count, 'contributor')
               ])
             ])
           ])
