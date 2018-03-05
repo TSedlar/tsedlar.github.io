@@ -77,6 +77,9 @@
     }
 
     const RepoList = (data, org) => {
+      data[org].sort((a, b) => {
+        return b.stargazers_count - a.stargazers_count
+      })
       return div({class: 'row row-centered'}, [
         div({class: 'col-md-12'}, [
           div({class: 'container'}, [
