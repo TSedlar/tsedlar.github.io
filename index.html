@@ -1,0 +1,200 @@
+<html lang=en>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="static/styles/font-awesome.min.css">
+  <link rel="stylesheet" href="static/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="static/styles/portfolio.css">
+  <link rel="stylesheet" href="static/styles/timeline.css">
+</head>
+
+<body>
+  <script src="static/scripts/jquery.min.js"></script>
+  <script src="static/scripts/bootstrap.min.js"></script>
+  <script src="static/scripts/hyperapp.js"></script>
+  <script src="static/scripts/hyperapp-html.js"></script>
+  <script>
+    const { h, app } = hyperapp
+    const { div, img, p, a, h1, h2, i, span, ul, li, small, em } = html
+
+    const state = {}
+    const actions = {}
+
+    const github = './static/github.json'
+    const colleagues = './static/colleagues.json'
+    const jobs = './static/jobs.json'
+
+    let plurality = (count, string) => {
+      if (count > 1) {
+        string += 's'
+      }
+      return string
+    }
+
+    const Repo = (repo) => {
+      return div({class: 'col-sm-6 col-md-4 col-centered repository'}, [
+        div({class: 'col-md-12'}, [
+          div({class: 'row repository-data'}, [
+            div({class: 'col-xs-8 col-md-8'}, [
+              h2([a({href: repo.html_url}, repo.name)]),
+              p({class: 'repository-description'}, [
+                i(repo.description)
+              ])
+            ]),
+            div({class: 'col-xs-4 col-md-4'}, [
+              div({class: 'row repository-stats'}, [
+                p({class: 'col-xs-12 col-md-12'}, [
+                  i({class: 'stat-icon fa fa-pencil'}),
+                  span(repo.updated_at)
+                ]),
+                p({class: 'col-xs-12 col-md-12'}, [
+                  i({class: 'stat-icon fa fa-tags'}),
+                  span(repo.language)
+                ]),
+                p({class: 'col-xs-12 col-md-12'}, [
+                  i({class: 'stat-icon fa fa-star'}),
+                  span(repo.stargazers_count),
+                  span(' '),
+                  span(plurality(repo.stargazers_count, 'star'))
+                ]),
+                p({class: 'col-xs-12 col-md-12'}, [
+                  i({class: 'stat-icon fa fa-chain'}),
+                  span(repo.forks_count),
+                  span(' '),
+                  span(plurality(repo.forks_count, 'fork'))
+                ]),
+                p({class: 'col-xs-12 col-md-12'}, [
+                  i({class: 'stat-icon fa fa-users'}),
+                  span(repo.contributor_count),
+                  span(' '),
+                  span(plurality(repo.contributor_count, 'contributor'))
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    }
+
+    const RepoList = (data, org) => {
+      return div({class: 'row row-centered'}, [
+        div({class: 'col-md-12'}, [
+          div({class: 'container'}, [
+            h1({class: 'org-title'}, org),
+            div({class: 'divider-vertical'}),
+            div({class: 'row row-centered'}, [
+              data[org].map(repo => Repo(repo))
+            ]),
+            div({class: 'divider-vertical'})
+          ])
+        ])
+      ])
+    }
+
+    const Task = (cData, task) => {
+      let children = []
+      if (typeof(task) === 'object') {
+        children.push(a({href: task.link}, task.info))
+        if (task.contribs && task.contribs.length > 0) {
+          children.push(span(' with'))
+          let idx = 0
+          for (let contrib of task.contribs) {
+            if (idx > 0 && task.contribs.length > 2) {
+              children.push(span('&'))
+            }
+            let person = cData.people[contrib]
+            children.push(span(' '))
+            children.push(a({href: person.profile}, `${person.name}`))
+          }
+        }
+      } else {
+        children.push(span(task))
+      }
+      return li(children)
+    }
+
+    const Job = (cData, job, idx) => {
+      let even = (idx % 2 == 0)
+      let alignment = (even ? 'timeline-content': 'timeline-content right')
+      return div({class: 'timeline-item'}, [
+        div({class: alignment}, [
+          div({class: 'timeline-icon', style: {
+            backgroundColor: job.color
+          }}, [
+            img({class: 'job-icon', src: job.icon})
+          ]),
+          h2(job.name),
+          ul({class: 'timeline-list'}, [
+            p({class: 'timeline-detail'}, [
+              small([
+                i({class: 'fa fa-clock-o'}, ` ${job.timeframe}`)
+              ])
+            ]),
+            p({class: 'timeline-detail'}, [
+              small([
+                i({class: 'fa fa-book'}, ` ${job.title}`)
+              ])
+            ]),
+            job.tasks.map(task => Task(cData, task))
+          ])
+        ])
+      ])
+    }
+
+    fetch(github)
+      .then(ghData => ghData.json())
+      .then(ghData => {
+        fetch(colleagues)
+          .then(cData => cData.json())
+          .then(cData => {
+            fetch(jobs)
+              .then(jData => jData.json())
+              .then(jData => {
+                const view = (state, actions) => (
+                  div({ id: 'content' }, [
+                    div({ id: 'cover', class: 'header' }),
+                    div({ class: 'avatar-container' }, [
+                      img({ id: 'avatar', src: './static/images/avatar.jpg' })
+                    ]),
+                    div({class: 'personal-info'}, [
+                      p({class: 'name'}, 'Tyler Sedlar'),
+                      p({class: 'btn-group'}, [
+                        a({
+                          class: 'shield btn btn-success',
+                          href: 'mailto:sedlarizona@gmail.com',
+                          target: '_top'
+                        }, 'E-Mail'),
+                        a({
+                          class: 'shield btn btn-primary',
+                          href: 'http://linkedin.com/in/tsedlar'
+                        }, 'LinkedIn'),
+                        a({
+                          class: 'shield btn btn-dark',
+                          href: 'https://github.com/TSedlar'
+                        }, 'GitHub'),
+                        a({
+                          class: 'shield btn btn-danger',
+                          href: './static/resume.pdf'
+                        }, 'Résumé')
+                      ]),
+                      div({class: 'divider-vertical'})
+                    ]),
+                    Object.keys(ghData).map(org => RepoList(ghData, org)),
+                    div({class: 'container'}, [
+                      div({class: 'section-title'}, [
+                        h1('Work Timeline')
+                      ]),
+                      div({class: 'divider-vertical'}),
+                      div({id: 'timeline'}, [
+                        jData.jobs.map((job, idx) => Job(cData, job, idx))
+                      ])
+                    ])
+                  ])
+                )
+                app(state, actions, view, document.body)
+              })
+          })
+      })
+  </script>
+</body>
