@@ -59,7 +59,7 @@ a {
 }
 
 .header:after {
-  content: url('../images/phx-night-pano.jpg')
+  content: url('../images/phx-night-pano.jpg');
   display: none;
 }
 
