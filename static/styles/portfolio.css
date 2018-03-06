@@ -58,6 +58,11 @@ a {
   background-position: center;
 }
 
+.header:after {
+  content: url('../images/phx-night-pano.jpg')
+  display: none;
+}
+
 .avatar-container {
   padding: 20px;
   width: auto;
