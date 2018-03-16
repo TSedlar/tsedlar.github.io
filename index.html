@@ -22,7 +22,7 @@
     const state = {}
     const actions = {}
 
-    const github = 'https://tyler-personal.storage.googleapis.com/tyler-github.json'
+    const github = 'https://tyler-personal.storage.googleapis.com/tyler-git.json'
     const colleagues = './static/colleagues.json'
     const jobs = './static/jobs.json'
 
@@ -144,7 +144,11 @@
       ])
     }
 
-    fetch(github)
+    fetch(github, {
+      headers: new Headers({
+        'Origin': 'https://sedlar.me/'
+      })
+    })
       .then(ghData => ghData.json())
       .then(ghData => {
         fetch(colleagues)
