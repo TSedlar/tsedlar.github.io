@@ -22,11 +22,18 @@
       const state = {};
       const actions = {};
 
-      const apps = "./static/apps.json";
       const github =
         "https://tyler-personal.storage.googleapis.com/tyler-git.json";
+
+      const apps = "./static/apps.json";
       const colleagues = "./static/colleagues.json";
       const jobs = "./static/jobs.json";
+      // const apps =
+      //   "https://raw.githubusercontent.com/TSedlar/tsedlar.github.io/master/static/apps.json";
+      // const colleagues =
+      //   "https://raw.githubusercontent.com/TSedlar/tsedlar.github.io/master/static/colleagues.json";
+      // const jobs =
+      //   "https://raw.githubusercontent.com/TSedlar/tsedlar.github.io/master/static/jobs.json";
 
       let plurality = (count, string) => {
         if (count > 1) {
@@ -90,7 +97,7 @@
       };
 
       const AppList = data => {
-        return div({ class: "row row-centered" }, [
+        return div({ class: "row row-centered", style: { marginTop: "25px" }}, [
           div({ class: "col-md-12" }, [
             div({ class: "container" }, [
               div({ class: "row row-centered" }, [
@@ -143,8 +150,9 @@
 
       const Job = (cData, job, idx) => {
         let even = idx % 2 == 0;
+        let iAlignment = even ? "timeline-item" : "timeline-item right";
         let alignment = even ? "timeline-content" : "timeline-content right";
-        return div({ class: "timeline-item" }, [
+        return div({ class: iAlignment }, [
           div({ class: alignment }, [
             div(
               {
@@ -238,10 +246,7 @@
                               jData.jobs.map((job, idx) => Job(cData, job, idx))
                             ])
                           ]),
-                          div({
-                            class: "divider-vertical",
-                            style: { marginTop: "0px" }
-                          }),
+                          div({ class: "divider-vertical after-timeline" }),
                           div(
                             {
                               class: "container",

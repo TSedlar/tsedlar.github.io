@@ -143,6 +143,16 @@ h1, h2, h3, h4, h5, h6, p.name, .btn {
   background-color: rgba(200, 200, 200, 0.5);
 }
 
+.after-timeline {
+  margin-top: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .after-timeline {
+    margin-top: -30px;
+  }
+}
+
 #content {
   /* display: none; */
   background-color: #FFFFFF;
@@ -151,6 +161,7 @@ h1, h2, h3, h4, h5, h6, p.name, .btn {
 .card {
   margin-top: 17px;
   width: 330px;
+  height: 140px;
   padding-left: 10px;
   padding-right: 10px;
   border: none;
