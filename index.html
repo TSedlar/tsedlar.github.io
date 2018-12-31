@@ -156,7 +156,13 @@
         let even = idx % 2 == 0;
         let iAlignment = even ? "timeline-item" : "timeline-item right";
         let alignment = even ? "timeline-content" : "timeline-content right";
-        let offset = { marginTop: job.offY ? job.offY : "0px" };
+        let offset = { marginTop: "0px" };
+        if (job.offY) {
+          offset = { marginTop: job.offY };
+        }
+        if ($(window).height() > 994 && job.offY_large) {
+          offset = { marginTop: job.offY_large};
+        }
         return div({ class: iAlignment, style: offset }, [
           div({ class: alignment }, [
             div(
@@ -259,7 +265,7 @@
                             },
                             [
                               div({ class: "section-title" }, [h1("Apps")]),
-                              div({ class: "divider-vertical" }),
+                              div({ class: "divider-vertical", style: { marginBottom: "40px"} }),
                               AppList(aData),
                               div({ class: "divider-vertical" })
                             ]

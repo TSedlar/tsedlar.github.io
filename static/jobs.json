@@ -51,7 +51,8 @@
         "Re-engineered Java bytecode and mapped opcode usage for reflecting data at runtime",
         "Created a macro repository in PHP and managed information through MySQL and MySQL Workbench"
       ],
-      "offY": "-35vh"
+      "offY": "-30vmin",
+      "offY_large": "-18vmin"
     },
     {
       "name": "Dequeue Ltd",
@@ -63,8 +64,7 @@
         "Wrote multiple Java plugins used for game automation",
         "Published plugins to a central repository for public use",
         "Monetized and maintained plugins for long lengths of time"
-      ],
-      "offY": "-5vh"
+      ]
     }
   ]
 }
