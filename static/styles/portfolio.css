@@ -24,7 +24,7 @@ footer {
   margin-bottom: 12px;
 }
 
-a { 
+a {
   color: #000000;
 }
 
@@ -148,14 +148,15 @@ h1, h2, h3, h4, h5, h6, p.name, .btn {
   background-color: #FFFFFF;
 }
 
-.repository {
+.card {
   margin-top: 17px;
   width: 330px;
   padding-left: 10px;
   padding-right: 10px;
+  border: none;
 }
 
-.repository-data {
+.card-data {
   background-color: #F2F2F2;
   border-radius: 8px;
 }
@@ -173,20 +174,20 @@ h1, h2, h3, h4, h5, h6, p.name, .btn {
   padding: 0 0 8 0;
 }
 
-.repository h2 {
+.card h2 {
   font-size: 12px;
   margin-top: 15px;
   margin-bottom: 8px;
 }
 
-.repository h4 {
+.card h4 {
   font-size: 12px;
   margin-top: 3px;
   margin-bottom: 15px;
   text-align: right;
 }
 
-.repository h2 i {
+.card h2 i {
   margin-right: 5px;
 }
 
@@ -199,6 +200,12 @@ h1, h2, h3, h4, h5, h6, p.name, .btn {
   text-indent: 0px;
 }
 
+.app-description {
+  margin-left: 0px;
+  font-size: 12px;
+  padding-right: 10px;
+}
+
 .repository-description {
   margin-left: 0px;
   font-size: 12px;
@@ -208,4 +215,13 @@ h1, h2, h3, h4, h5, h6, p.name, .btn {
 .repository-desc-container {
   width: 180px;
   padding-left: 20px;
+}
+
+.app-store-icons {
+  float: right;
+}
+
+.app-desc-container {
+  width: 95%;
+  padding-left: 7.5%;
 }

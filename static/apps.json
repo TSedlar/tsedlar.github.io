@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "Learn JP",
+      "description": "An app that helps to learn the Japanese syllabaries: Hiragana, Katakana, and some commonly used Kanji.",
+      "appstore": "#",
+      "playstore": "https://play.google.com/store/apps/details?id=me.sedlar.learnjp"
+    }
+  ]
+}

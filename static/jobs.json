@@ -8,46 +8,36 @@
       "timeframe": "5/19/2014 - Current",
       "tasks": [
         {
-          "link": "https: //github.com/kylestev/jvm.js", "info": "Created a bytecode analysis library for Java written in Node.js",
+          "link": "https: //github.com/kylestev/jvm.js",
+          "info": "Created a bytecode analysis library",
           "contribs": [0]
         },
         {
-          "link": "https: //github.com/disassemble-io/asm-framework-full", "info": "Created a framework for analyzing the control flow of a program using ASM"
+          "link": "https: //github.com/disassemble-io/asm-framework-full",
+          "info": "Created a framework for analyzing program control flow using ASM"
         },
         {
-          "link": "https: //github.com/TSedlar/RSMacro",
-          "info": "Created an automation tool for an MMO using various color analysis algorithms",
+          "link": "https://github.com/TSedlar/gr8bar",
+          "info": "Created a cross-platform status bar",
           "contribs": [1]
         },
         {
-          "link": "https: //gist.github.com/TSedlar/e9a3abaf43f31fc00f6b", "info": "Reported security issues (same-origin policy) having to do with edhesive.com courseware"
+          "link": "https: //gist.github.com/TSedlar/e9a3abaf43f31fc00f6b",
+          "info": "Reported security issues (same-origin policy) having to do with edhesive.com courseware"
         },
         {
-          "link": "https: //github.com/disassemble-io/kNN",
-          "info": "Created an open source, minimal and quick Java implementation of a kNN (k-Nearest-Neighbors) algorithm"
-        },
-        {
-          "link": "https: //github.com/TSedlar/mal-scrobble",
+          "link": "https://github.com/TSedlar/anitrack",
           "info": "Created an open source chrome plugin for scrobbling watched TV shows",
           "contribs": [2]
         },
         {
-          "link": "https: //github.com/disassemble-io/agent-callback", "info": "Created an open source Java agent for viewing method argument call order"
+          "link": "https: //github.com/disassemble-io/agent-callback",
+          "info": "Created an open source Java agent for viewing method argument call order"
         },
         {
-          "link": "https: //github.com/TSedlar/github-scraper", "info": "Created an NPM module used for scraping GitHub user information"
+          "link": "https://github.com/TSedlar/GridWM",
+          "info": "Created a grid-like workspace manager"
         }
-      ]
-    },
-    {
-      "name": "RS-Hacking",
-      "title": "Community Administrator",
-      "color": "#103593",
-      "icon": "./static/images/rsh.png",
-      "timeframe": "1/13/2013 - Current",
-      "tasks": [
-        "Help manage a community that re-engineers .jar/.dex files",
-        "Created a standardized format for sharing files"
       ]
     },
     {
