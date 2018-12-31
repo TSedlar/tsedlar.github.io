@@ -65,8 +65,8 @@ small {
 }
 
 #timeline .timeline-item {
-  margin-bottom: 50px;
   position: relative;
+  margin-bottom: 50px;
 }
 
 .job-icon {
@@ -98,6 +98,7 @@ small {
 
 #timeline .timeline-item .timeline-content {
   width: 45%;
+  max-width: 410px;
   background-color: #FFFFFF;
   padding: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -160,6 +161,16 @@ small {
   margin-left: -17px;
 }
 
+@media screen and (min-width: 1200px) {
+  #timeline .timeline-item .timeline-content {
+    margin-left: 82px;
+  }
+
+  #timeline .timeline-item .timeline-content.right {
+    margin-right: 82px;
+  }
+}
+
 @media screen and (max-width: 768px) {
 
   #timeline {
@@ -175,6 +186,7 @@ small {
   #timeline .timeline-item .timeline-content {
     width: 90%;
     float: right;
+    margin-right: 4px;
   }
 
   #timeline .timeline-item .timeline-content:before, #timeline .timeline-item .timeline-content.right:before {
@@ -186,5 +198,9 @@ small {
 
   #timeline .timeline-item .timeline-icon {
     left: 0;
+  }
+
+  #timeline .timeline-item {
+    margin-top: 0 !important;
   }
 }

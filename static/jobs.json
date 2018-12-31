@@ -50,7 +50,8 @@
         "Wrote Java source code for a public client-sided API used for MMO automation",
         "Re-engineered Java bytecode and mapped opcode usage for reflecting data at runtime",
         "Created a macro repository in PHP and managed information through MySQL and MySQL Workbench"
-      ]
+      ],
+      "offY": "-35vh"
     },
     {
       "name": "Dequeue Ltd",
@@ -62,7 +63,8 @@
         "Wrote multiple Java plugins used for game automation",
         "Published plugins to a central repository for public use",
         "Monetized and maintained plugins for long lengths of time"
-      ]
+      ],
+      "offY": "-5vh"
     }
   ]
 }

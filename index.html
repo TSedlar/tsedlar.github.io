@@ -98,15 +98,18 @@
       };
 
       const AppList = data => {
-        return div({ class: "row row-centered", style: { marginTop: "25px" }}, [
-          div({ class: "col-md-12" }, [
-            div({ class: "container" }, [
-              div({ class: "row row-centered" }, [
-                data.apps.map(repo => App(repo))
+        return div(
+          { class: "row row-centered", style: { marginTop: "25px" } },
+          [
+            div({ class: "col-md-12" }, [
+              div({ class: "container" }, [
+                div({ class: "row row-centered" }, [
+                  data.apps.map(repo => App(repo))
+                ])
               ])
             ])
-          ])
-        ]);
+          ]
+        );
       };
 
       const RepoList = (data, org) => {
@@ -153,7 +156,8 @@
         let even = idx % 2 == 0;
         let iAlignment = even ? "timeline-item" : "timeline-item right";
         let alignment = even ? "timeline-content" : "timeline-content right";
-        return div({ class: iAlignment }, [
+        let offset = { marginTop: job.offY ? job.offY : "0px" };
+        return div({ class: iAlignment, style: offset }, [
           div({ class: alignment }, [
             div(
               {
