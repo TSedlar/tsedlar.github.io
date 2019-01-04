@@ -1,0 +1,143 @@
+\documentclass[a4paper]{article}
+    \usepackage{fullpage}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{textcomp}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \usepackage[margin=1in]{geometry}
+    \textheight=10in
+    \pagestyle{empty}
+    \raggedright
+
+\def\bull{\vrule height 0.8ex width .7ex depth -.1ex }
+
+% DEFINITIONS FOR RESUME %%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\area} [2] {
+    \vspace*{-9pt}
+    \begin{verse}
+        \textbf{#1}   #2
+    \end{verse}
+}
+
+\newcommand{\lineunder} {
+    \vspace*{-8pt} \\
+    \hspace*{-18pt} \hrulefill \\
+}
+
+\newcommand{\header} [1] {
+    {\hspace*{-18pt}\vspace*{6pt} \textsc{#1}}
+    \vspace*{-6pt} \lineunder
+}
+
+\newcommand{\employer} [3] {
+    { \textbf{#1} (#2)\\ \underline{\textbf{\emph{#3}}}\\  }
+}
+
+\newcommand{\contact} [3] {
+    \vspace*{-10pt}
+    \begin{center}
+        {\Huge \scshape {#1}}\\
+        #2 \\ #3
+    \end{center}
+    \vspace*{-8pt}
+}
+
+\newenvironment{achievements}{
+    \begin{list}
+        {$\bullet$}{\topsep 0pt \itemsep -2pt}}{\vspace*{4pt}
+    \end{list}
+}
+
+\newcommand{\schoolwithcourses} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+    \vspace*{5pt}
+}
+
+\newcommand{\school} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+}
+% END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\vspace*{-40pt}
+
+%==== Profile ====%
+\vspace*{-10pt}
+\begin{center}
+	{\Huge \scshape {Tyler Sedlar}}\\
+	Chandler, AZ $\cdot$ sedlarizona@gmail.com $\cdot$ (480) 685-1959 $\cdot$ sedlar.me\\
+\end{center}
+
+%==== Education ====%
+\header{Education}
+\textbf{Rio Salado College}\hfill Tempe, AZ\\
+AAS Mobile Application Programming, \textit{3.6 GPA} \hfill 2018 - 2020\\
+\vspace{2mm}
+\textbf{Rio Salado College}\hfill Tempe, AZ\\
+CCL Programming, \textit{3.6 GPA} \hfill 2018 - 2019\\
+\vspace{2mm}
+
+%==== Experience ====%
+\header{Experience}
+\vspace{1mm}
+
+\textbf{Freelance} \hfill Chandler, AZ\\
+\textit{Full Stack Developer} \hfill 2014 | Now\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+	\item Created a Java bytecode analysis library written with NodeJS
+	\item Built a Java bytecode control flow library using ASM
+	\item Wrote macro software for an MMO using color analysis
+	\item Authored a web extension used to track TV show progress
+	\item Composed a Java-Agent used to view runtime method data
+\end{itemize}
+\textbf{Gold4Players LLC} \hfill Miami, FL\\
+\textit{Remote Full Stack Developer} \hfill 2013 | 2014\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+	\item Re-engineered Java bytecode for runtime reflection or proxying
+	\item Created a plugin repository web application with PHP
+	\item Managed plugins using MySQL and MySQL Workbench
+\end{itemize}
+\textbf{Dequeue Ltd} \hfill Holborn, London\\
+\textit{Remote Java Software Developer} \hfill 2010 | 2013\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+	\item Published plugins to a centralized repository for public use
+	\item Maintained and monetized plugins for long lengths of time
+\end{itemize}
+
+\header{Skills}
+\vspace{2mm}
+\begin{tabular}{ l l }
+	Programming Languages: & Java, Kotlin, JavaScript, NodeJS, Python, MySQL, HTML, PHP, CSS \\
+	Frameworks:            & ReactJS, Angular 2, Express, Mongoose, jQuery, Cordova          \\
+	Tools:                 & Git, Maven, Gradle, MySQL Workbench, Atom, VSCode, IntelliJ     \\
+\end{tabular}
+\vspace{2mm}
+
+\header{Projects}
+{\textbf{Learn JP}}\\
+A mobile application that helps with learning Japanese kana and kanji\\
+\vspace*{2mm}
+{\textbf{Anitrack}}\\
+A web extension used to track what you\textquotesingle{}re watching with MAL or Kitsu\\
+\vspace*{2mm}
+{\textbf{Gr8bar}}\\
+A cross-platform statusbar made with Python and Qt5\\
+\vspace*{2mm}
+{\textbf{GridWM}}\\
+A program used for desktop workspace organization\\
+\vspace*{2mm}
+{\textbf{Javanalysis}}\\
+A framework that improves analysis functionality of Javassist\\
+\vspace*{2mm}
+{\textbf{WaveNet Audiobook}}\\
+A program that converts text files into an audiobook using Google WaveNet\\
+\vspace*{2mm}
+
+\end{document}
