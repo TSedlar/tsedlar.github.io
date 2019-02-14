@@ -1,4 +1,12 @@
-@import url("https://fonts.googleapis.com/css?family=Dosis");
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src:
+    local("Arial"),
+    url("../fonts/Dosis-Regular.woff") format('woff');
+}
 
 html, body {
   width: 100%;
@@ -60,8 +68,20 @@ a {
   background-image: url('../images/phx-night-pano.webp');
 }
 
-.no-js.no-webp .header {
+.js.webp .header:after {
+  content: url('../images/phx-night-pano.webp');
+  display: none;
+}
+
+.no-js.no-webp .header,
+.js.no-webp .header {
    background-image: url('../images/phx-night-pano.jpg');
+}
+
+.no-js.no-webp .header:after,
+.js.no-webp .header:after {
+  content: url('../images/phx-night-pano.jpg');
+  display: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
