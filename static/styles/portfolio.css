@@ -60,19 +60,8 @@ a {
   background-image: url('../images/phx-night-pano.webp');
 }
 
-.js.webp .header:after {
-  content: url('../images/phx-night-pano.webp');
-  display: none;
-}
-
 .no-js.no-webp .header {
    background-image: url('../images/phx-night-pano.jpg');
-}
-
-.no-js.no-webp .header:after,
-.js.no-webp .header:after {
-  content: url('../images/phx-night-pano.jpg');
-  display: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
