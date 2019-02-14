@@ -52,12 +52,19 @@ a {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  background-image: url('../images/phx-night-pano.jpg');
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.header:after {
+.js.webp .header {
+  background-image: url('../images/phx-night-pano.webp');
+}
+
+.no-js .header, .js.no-webp .header {
+   background-image: url('../images/phx-night-pano.jpg');
+}
+
+.no-js .header:after, .js.no-webp .header:after {
   content: url('../images/phx-night-pano.jpg');
   display: none;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js no-webp">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,13 +13,14 @@
   <body>
     <script src="static/scripts/jquery.min.js"></script>
     <script src="static/scripts/bootstrap.min.js"></script>
+    <script src="static/scripts/modernizr.min.js"></script>
     <script src="static/scripts/hyperapp.min.js"></script>
     <script src="static/scripts/hyperapp-html.min.js"></script>
     <script src="static/scripts/hyperapp-renderer.min.js"></script>
 
     <script>
       const { h, app } = hyperapp
-      const { div, img, p, a, h4, i, span, ul, li, article, summary, details } = hyperappHtml
+      const { div, img, source, p, a, h4, i, span, ul, li, article, summary, details } = hyperappHtml
       const { renderToString } = hyperappRender
 
       const state = {}
@@ -133,10 +134,11 @@
           div({ id: "cover", class: "header" }),
 
           div({ class: "avatar-container" }, [
-            img({
-              id: "avatar",
-              src: "./static/images/avatar.jpg"
-            })
+              h("picture", {}, [
+                source({ srcset: "./static/images/avatar.webp", type: "image/webp" }),
+                source({ srcset: "./static/images/avatar.jpg", type: "image/jpeg" }),
+                img({ id: "avatar" })
+              ])
           ]),
 
           div({ id: "resume", class: "row" }, [
