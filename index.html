@@ -13,15 +13,17 @@
   <body>
     <script src="static/scripts/jquery.min.js"></script>
     <script src="static/scripts/bootstrap.min.js"></script>
-    <script src="static/scripts/hyperapp.js"></script>
-    <script src="static/scripts/hyperapp-html.js"></script>
+    <script src="static/scripts/hyperapp.min.js"></script>
+    <script src="static/scripts/hyperapp-html.min.js"></script>
+    <script src="static/scripts/hyperapp-renderer.min.js"></script>
 
     <script>
-      const { h, app } = hyperapp;
-      const { div, img, p, a, h4, i, span, ul, li, article, summary, details } = html;
+      const { h, app } = hyperapp
+      const { div, img, p, a, h4, i, span, ul, li, article, summary, details } = hyperappHtml
+      const { renderToString } = hyperappRender
 
-      const state = {};
-      const actions = {};
+      const state = {}
+      const actions = {}
 
       const Cert = (place, duration, location, gpa, name) => {
         return div([
@@ -75,15 +77,29 @@
           detailArray = detailChildren
         }
         return article([
-          details([
-            summary({ class: "bold" }, name),
-            div({ class: "inner-details" }, [
-              p(linkArray),
-              p(detailText),
-              detailArray
+          details({
+            oncreate: (detailsElement) => {
+              detailsElement.onclick = () => {
+                if (!detailsElement.open) {
+                  while (detailsElement.lastChild && detailsElement.children.length > 1) { // keep summary
+                    detailsElement.removeChild(detailsElement.lastChild)
+                  }
+                  const container = document.createElement('div')
+                  container.innerHTML = renderToString(div({ class: "inner-details" }, [
+                    p(linkArray),
+                    p(detailText),
+                    detailArray
+                  ]))
+                  detailsElement.appendChild(container)
+                }
+              }
+            }
+          }, [
+            summary([
+              span({ class: "bold" }, name),
+              p(summaryText)
             ])
-          ]),
-          p(summaryText),
+          ])
         ])
       }
 
@@ -96,7 +112,7 @@
         const images = []
         for (let i = min; i <= max; i++) {
           const image = `${folder}${i}.${ext}`
-          images.push(img({ class: "preview-img", src: image, width: previewWidth, height: previewHeight,
+          images.push(img({ class: "preview-img", "src": image, width: previewWidth, height: previewHeight,
             onclick: () => {
               const modalImage = document.getElementById("modal-image")
               modalImage.src = image
@@ -109,7 +125,7 @@
 
       const view = (state, actions) =>
         div({ id: "content" }, [
-          div({ id: "image-modal", class: "modal" }, [
+          div({ id: "image-modal", class: "modal", onclick: () => { showModal(false) } }, [
             span({ class: "close", onclick: () => { showModal(false) }}, "x"),
             img({ id: "modal-image", class: "modal-content"})
           ]),
@@ -268,8 +284,9 @@
               )
             ])
           ])
-        ]);
-      app(state, actions, view, document.body);
+        ])
+
+      app(state, actions, view, document.body)
     </script>
   </body>
 </html>
