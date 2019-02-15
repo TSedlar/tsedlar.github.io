@@ -22,13 +22,13 @@
       button({
         onclick: () => {
           this.state.ctr = Math.max(0, this.state.ctr - 1);
-          alert('down');
+          alert(JSON.stringify(this.state));
         }
       }, '-'),
       button({
         onclick: () => {
           this.state.ctr++;
-          alert('up');
+          alert(JSON.stringify(this.state));
         }
       }, '+')
     ]);

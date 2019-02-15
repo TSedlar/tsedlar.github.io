@@ -74,6 +74,7 @@ const ELTAG_ELEMENT_TAGS = [
       const ctx = props.ctx;
       const renderer = props.render;
       if (ctx && renderer && STATE_MAP.has(ctx)) {
+        alert('rerender @ ' + element);
         const state = STATE_MAP.get(ctx);
         while (element.firstChild) {
           element.removeChild(element.firstChild);
