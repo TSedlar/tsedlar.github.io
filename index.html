@@ -124,7 +124,7 @@
       }
 
       const view = (state, actions) =>
-        div({ id: "content" }, [
+        div({ id: "content container-fluid p-0" }, [
           div({ id: "image-modal", class: "modal", onclick: () => { showModal(false) } }, [
             span({ class: "close", onclick: () => { showModal(false) }}, "x"),
             img({ id: "modal-image", class: "modal-content"})
