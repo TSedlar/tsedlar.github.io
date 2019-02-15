@@ -78,7 +78,13 @@
                 const innerDetails = div({ class: "inner-details" }, [
                   p(this.state.linkArray),
                   p(this.state.detailText),
-                  ...this.state.detailArray
+                  ...this.state.detailArray.map(x => {
+                    if (x instanceof Element || x instanceof HTMLDocument) {
+                      return x
+                    } else {
+                      return img(x)
+                    }
+                  })
                 ])
                 this.ref.appendChild(innerDetails)
                 const imgs = innerDetails.querySelectorAll(".preview-img")
@@ -109,7 +115,7 @@
         const images = []
         for (let i = min; i <= max; i++) {
           const image = `${folder}${i}.${ext}`
-          images.push(img({ class: "preview-img", "src": image, width: previewWidth, height: previewHeight }))
+          images.push({ class: "preview-img", "src": image, width: previewWidth, height: previewHeight })
         }
         return images
       }
@@ -262,7 +268,7 @@
                     "issue", i({ class: "fa fa-external-link" })
                   ])
                 ]),
-                ImageArray("./static/images/projects/games-nebula/", 0, 2, "jpg", 500, 320)
+                ...ImageArray("./static/images/projects/games-nebula/", 0, 2, "jpg", 500, 320)
               ]
             ),
 
