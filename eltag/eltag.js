@@ -132,13 +132,16 @@ const ELTAG_ELEMENT_TAGS = [
       } else {
         PROPERTY_MAP.set(element, { render: realProperties.render })
       }
+
+      if (!realProperties.style) {
+          realProperties.style = {};
+      }
   
       for (let trigger of ELTAG_ELEMENT_TRIGGERS) {
         if (realProperties[trigger]) {
           const fn = realProperties[trigger];
           if (trigger === 'onclick' && 'ontouchstart' in window) { // handle mobile quirks
-            delete realProperties[trigger];
-            trigger = 'ontouchstart';
+            realProperties.style.cursor = 'pointer';
           }
           realProperties[trigger] = () => {
             _runInContext(fn, { ref: element, state: STATE_MAP.get(PROPERTY_MAP.get(element).ctx) });
@@ -154,10 +157,8 @@ const ELTAG_ELEMENT_TAGS = [
         element.className = realProperties.class;
       }
   
-      if (realProperties.style) {
-        for (let styleAttr in realProperties.style) {
-          element.style[styleAttr] = realProperties.style[styleAttr];
-        }
+      for (let styleAttr in realProperties.style) {
+        element.style[styleAttr] = realProperties.style[styleAttr];
       }
   
       if (Array.isArray(realChildren)) {
