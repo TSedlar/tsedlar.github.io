@@ -20,16 +20,10 @@
         render: () => this.state.ctr
       }),
       button({
-        onclick: () => {
-          this.state.ctr = Math.max(0, this.state.ctr - 1);
-          alert(JSON.stringify(this.state));
-        }
+        onclick: () => this.setState({ ctr: Math.max(0, this.state.ctr - 1) })
       }, '-'),
       button({
-        onclick: () => {
-          this.state.ctr++;
-          alert(JSON.stringify(this.state));
-        }
+        onclick: () => this.setState({ ctr: this.state.ctr + 1})
       }, '+')
     ]);
 
