@@ -1,0 +1,36 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #272C41;
+  font-family: "Arial";
+}
+
+button {
+  width: 1em;
+  height: 1em;
+  border-radius: 0px;
+  font-size: 4em;
+  line-height: 1;
+  margin: 10px;
+  border: 1px solid #ACB28A;
+  background: #4B6865;
+  color: #EBE0A2;
+  transition: background .2s;
+}
+
+button:hover,
+button:active,
+button:focus {
+  background: #EBE0A2;
+  color: #4B6865;
+}
+
+#counter {
+  color: #D77454;
+  font-size: 8em;
+}

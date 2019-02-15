@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>divapp.js</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <script src="divapp.min.js"></script>
+  <script>
+    const { renderElement, app, p, button } = DivApp;
+
+    const main = app({
+      state: { ctr: 0 }
+    }, [
+      p({ 
+        id: 'counter',
+        render: () => this.state.ctr
+      }),
+      button({
+        onclick: () => this.state.ctr = Math.max(0, this.state.ctr - 1)
+      }, '-'),
+      button({
+        onclick: () => this.state.ctr++
+      }, '+')
+    ]);
+
+    renderElement(document.body, main);
+  </script>
+</body>
+</html>
