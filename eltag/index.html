@@ -20,10 +20,16 @@
         render: () => this.state.ctr
       }),
       button({
-        onclick: () => this.state.ctr = Math.max(0, this.state.ctr - 1)
+        onclick: () => {
+          this.state.ctr = Math.max(0, this.state.ctr - 1);
+          alert('down');
+        }
       }, '-'),
       button({
-        onclick: () => this.state.ctr++
+        onclick: () => {
+          this.state.ctr++;
+          alert('up');
+        }
       }, '+')
     ]);
 
