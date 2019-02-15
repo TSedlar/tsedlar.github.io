@@ -47,13 +47,13 @@ const ELTAG_ELEMENT_TAGS = [
   
       defineProperty: (target, property, descriptor) => {
         const redefined = Reflect.defineProperty(target, property, descriptor);
-        _renderContextTree(element)
+        _renderTree(element)
         return redefined;
       },
   
       deleteProperty: (target, property) => {
         const redefined = Reflect.deleteProperty(target, property);
-        _renderContextTree(element)
+        _renderTree(element)
         return redefined;
       }
     });
@@ -74,12 +74,12 @@ const ELTAG_ELEMENT_TAGS = [
       const ctx = props.ctx;
       const renderer = props.render;
       if (ctx && renderer && STATE_MAP.has(ctx)) {
-        alert('rerender @ ' + element);
+        // alert('rerender @ ' + element);
         const state = STATE_MAP.get(ctx);
         while (element.firstChild) {
           element.removeChild(element.firstChild);
         }
-        const render = _runInContext(renderer, { state });
+        const render = _runInContext(renderer, state);
         element.appendChild(document.createTextNode(render));
       }
     }
@@ -129,7 +129,9 @@ const ELTAG_ELEMENT_TAGS = [
   
       if (realProperties.state) {
         PROPERTY_MAP.set(element, { ctx: element, render: realProperties.render });
-        STATE_MAP.set(element, _createStateProxy(element, realProperties.state));
+        STATE_MAP.set(element, _createStateProxy(element, {
+          state: _createStateProxy(element, realProperties.state)
+        }));
       } else {
         PROPERTY_MAP.set(element, { render: realProperties.render })
       }
@@ -145,7 +147,7 @@ const ELTAG_ELEMENT_TAGS = [
             realProperties.style.cursor = 'pointer';
           }
           realProperties[trigger] = () => {
-            _runInContext(fn, { ref: element, state: STATE_MAP.get(PROPERTY_MAP.get(element).ctx) });
+            _runInContext(fn, STATE_MAP.get(PROPERTY_MAP.get(element).ctx));
           };
         }
       }
