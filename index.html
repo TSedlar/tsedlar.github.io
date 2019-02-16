@@ -8,8 +8,6 @@
   </head>
 
   <body>
-    <script defer src="static/scripts/jquery.min.js"></script>
-    <script defer src="static/scripts/bootstrap.min.js"></script>
     <script src="static/scripts/modernizr.min.js"></script>
     <script src="static/scripts/eltag.min.js"></script>
 
@@ -120,7 +118,7 @@
         return images
       }
 
-      const view = div({ id: "content", class: "container-fluid p-0" }, [
+      const view = div({ id: "content" }, [
         div({ id: "image-modal", class: "modal", onclick: () => { showModal(false) } }, [
           span({ class: "close", onclick: () => { showModal(false) }}, "x"),
           img({ id: "modal-image", class: "modal-content"})
@@ -136,8 +134,8 @@
             ])
         ]),
 
-        div({ id: "resume", class: "row" }, [
-          div({ class: "col-sm-5 col-12" }, [
+        div({ id: "resume" }, [
+          div({ id: "left-column" }, [
             /* About */
             h4("About"),
 
@@ -177,7 +175,7 @@
             p("Git, Maven, Gradle, MySQL Workbench, Atom, VSCode, IntelliJ")
           ]),
 
-          div({ class: "col-sm-7 col-12" }, [
+          div({ id: "right-column" }, [
             /* Experience */
             h4("Experience"),
 
@@ -302,7 +300,6 @@
     </script>
     
     <link rel="stylesheet" type="text/css" href="static/styles/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="static/styles/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="static/styles/portfolio.css" />
   </body>
 </html>

@@ -90,13 +90,26 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   text-transform: uppercase;
   color: #734957;
-  padding-top: 10px;
   border-bottom: 1px solid #734957;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+a {
+  text-decoration: none;
+}
+
+summary {
+  cursor: pointer;
 }
 
 .avatar-container {
   position: relative;
-  padding: 20px;
   width: auto;
   left: 50%;
   margin-left: -100px;
@@ -129,11 +142,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #resume {
-  width: 96%;
-  margin-left: 2%;
+  width: 98%;
+  margin-left: 1%;
   margin-right: 0;
   padding: 0;
   padding-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: space-between;
 }
 
 #resume p {
@@ -143,6 +161,18 @@ h1, h2, h3, h4, h5, h6 {
 
 #resume i {
   margin-left: 5px;
+}
+
+#left-column {
+  flex-grow: 3;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+#right-column {
+  flex-grow: 7;
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
 .bold {
@@ -165,6 +195,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px;
   max-width: 260px;
   height: auto;
+  cursor: pointer;
 }
 
 .modal {
