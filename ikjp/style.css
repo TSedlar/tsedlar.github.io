@@ -1,0 +1,131 @@
+:root {
+  --bg: #272C41;
+  --bg-accent: #1d2131; 
+  --bg-accent2: #444c71; 
+  --fg: #EBE0A2;
+  --fg2: #a0a7c6;
+  --success-bg: #27413c;
+  --success-fg: #94bfb7;
+  --error-bg: #41272c;
+  --error-fg: #b88891;
+}
+
+body {
+  text-align: center;
+  width: 100%;
+  height: 70vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Arial";
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+#level-menu {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 0;
+  margin-left: 0px;
+  margin-top: 10px;
+}
+
+#guesses {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 0;
+  margin-left: 0px;
+  margin-top: 19px;
+  text-align: center;
+  width: 100%;
+  transition: 500ms;
+}
+
+#furigana {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin: 10px;
+}
+
+#text-content {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 25%;
+}
+
+#jp-text {
+  font-size: 4vh;
+  width: 100%;
+}
+
+#jp-input {
+  width: 100%;
+  background-color: var(--bg-accent);
+  height: 24px;
+  border: 1px solid var(--bg-accent);
+  border-radius: 2px;
+}
+
+#jp-check {
+  margin-top: 10px;
+  width: 74%;
+  background: var(--bg-accent2) !important;
+  color: var(--fg2) !important;
+}
+
+#jp-next {
+  margin-left: 2%;
+  margin-top: 10px;
+  width: 24%;
+  background: var(--bg-accent2) !important;
+  color: var(--fg2) !important;
+}
+
+#low-info {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid var(--fg);
+  text-align: center;
+}
+
+#choose {
+  font-size: 2.75em;
+  color: var(--fg);
+  margin-top: 35vh;
+}
+
+#menuLink1:hover {
+  background-color: var(--bg) !important;
+}
+
+.pure-menu-link {
+  color: var(--fg) !important;
+  background-color: var(--bg) !important;
+  outline: none !important;
+}
+
+.pure-menu-link:hover {
+  background-color: var(--bg-accent) !important;
+}
+
+.button-success {
+  background: var(--success-bg) !important;
+  color: var(--success-fg) !important;
+}
+
+.button-error {
+  background: var(--error-bg) !important;
+  color: var(--error-fg) !important;
+}
+
+.correct {
+  color: var(--success-fg) !important;
+}
+
+.incorrect {
+  color: var(--error-fg) !important;
+}

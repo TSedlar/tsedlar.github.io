@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="../static/styles/pure.min.css">
+  <title>iknow.jp</title>
+</head>
+
+<body>
+  <script src="../static/scripts/eltag.min.js"></script>
+
+  <script>
+    const { renderElement, app, p, div, ul, li, a, span, button, input } = ElTag;
+
+    const LEVELS = [
+      { name: 'Japanese Core 1000', url: '../static/etc/ikjp-1000.json' }
+    ];
+
+    const levelMenu = () => div({ id: 'level-menu' }, [
+      ul({ class: 'pure-menu-list pure-menu-horizontal' }, [
+        li({ class: 'pure-menu-item pure-menu-has-children pure-menu-allow-hover' }, [
+          a({ id: 'menuLink1', class: 'pure-menu-link', href: '#' }, 'Choose Level'),
+          ul({ class: 'pure-menu-children' }, LEVELS.map(x => li({ class: 'pure-menu-item' }, [a({
+            class: 'pure-menu-link',
+            href: '#',
+            state: { url: x.url },
+            onclick: () => {
+              const self = this;
+              fetch(self.state.url)
+                .then(res => res.json())
+                .then(res => {
+                  self.parent.setState({ data: res });
+                  self.parent.actions.choose();
+                });
+            }
+          }, x.name)])))
+        ])
+      ])
+    ]);
+
+    const view = app({
+      state: { data: [], chosen: null, furigana: true, correct: 0, guesses: 0 },
+      actions: {
+        choose: () => {
+          if (this.state.data.length > 0) {
+            this.setState({ chosen: this.state.data[Math.floor(Math.random() * this.state.data.length)] });
+          }
+        }
+      }
+    }, [
+      levelMenu(),
+      span({
+        id: 'guesses',
+        render: () => this.state.correct + '/' + this.state.guesses
+      }),
+      button({ 
+        id: 'furigana',
+        class: 'pure-button button-success',
+        onclick: () => {
+          this.ref.classList.toggle('button-success');
+          this.ref.classList.toggle('button-error');
+          this.setState({ furigana: !this.state.furigana });
+        },
+        render: () => this.state.furigana ? 'Furigana ✓' : 'Furigana ×'
+      }),
+      p({
+        id: 'choose',
+        condition: () => !this.state.chosen
+      }, 'Please choose a level!'),
+      div({
+        id: 'text-content',
+        condition: () => this.state.chosen
+      }, [
+        p({
+          id: 'jp-text',
+          render: () => this.state.furigana ? this.state.chosen.jpf : this.state.chosen.jpk
+        }),
+        input({ id: 'jp-input', type: 'text' }),
+        button({
+          id: 'jp-check',
+          class: 'pure-button',
+          onclick: () => {
+            const guessEl = document.getElementById('guesses');
+            const txt = document.getElementById('jp-input').value.replace(/\s/g, '');
+            if (txt === this.state.chosen.jpk.replace(/\s/g, '') || txt === this.state.chosen.jpf.replace(/\s/g, '')) {
+              this.setState({ correct: this.state.correct + 1});
+              guessEl.classList.remove('incorrect');
+              guessEl.classList.add('correct');
+              this.actions.choose();
+            } else {
+              guessEl.classList.remove('correct');
+              guessEl.classList.add('incorrect');
+            }
+            setTimeout(() => {
+              guessEl.classList.remove('incorrect');
+              guessEl.classList.remove('correct');
+            }, 500);
+            this.setState({ guesses: this.state.guesses + 1 });
+          }
+        }, 'Check'),
+        button({
+          id: 'jp-next',
+          class: 'pure-button',
+          onclick: () => this.actions.choose()
+        }, 'Next'),
+        div({ id: 'low-info' }, [
+          p('The above is used to learn:'),
+          p({ render: () => this.state.chosen['kanji_jp'] }),
+          p({ render: () => '"' + this.state.chosen['kanji_en'] + '"' }),
+        ])
+      ])
+    ]);
+
+    renderElement(document.body, view);
+  </script>
+</body>
+
+</html>
