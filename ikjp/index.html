@@ -48,6 +48,7 @@
         choose: () => {
           if (this.state.data.length > 0) {
             this.setState({ chosen: this.state.data[Math.floor(Math.random() * this.state.data.length)] });
+            document.getElementById('jp-input').value = '';
           }
         }
       }

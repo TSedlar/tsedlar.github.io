@@ -31,14 +31,10 @@ body {
 }
 
 #guesses {
-  position: absolute;
-  top: 0px;
-  left: 0px;
+  position: relative;
+  top: 19px;
+  margin: 0;
   padding: 0;
-  margin-left: 0px;
-  margin-top: 19px;
-  text-align: center;
-  width: 100%;
   transition: 500ms;
 }
 
@@ -63,12 +59,14 @@ body {
 #jp-input {
   width: 100%;
   background-color: var(--bg-accent);
-  height: 24px;
+  font-size: 4vh;
+  height: 4vh;
   border: 1px solid var(--bg-accent);
   border-radius: 2px;
 }
 
 #jp-check {
+  float: left;
   margin-top: 10px;
   width: 74%;
   background: var(--bg-accent2) !important;
@@ -76,7 +74,7 @@ body {
 }
 
 #jp-next {
-  margin-left: 2%;
+  float: right;
   margin-top: 10px;
   width: 24%;
   background: var(--bg-accent2) !important;
