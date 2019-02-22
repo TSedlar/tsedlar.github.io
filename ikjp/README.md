@@ -7,6 +7,6 @@ The main use of this is to type the result into the input bar using an IME, so t
 
 You can otherwise use it as a tool to learn vocabulary.
 
-![](ikjp/ikjp.png)
+![](ikjp.png)
 
 Many thanks to [iknow.jp](https://iknow.jp/content/japanese) for their content and example lists.
