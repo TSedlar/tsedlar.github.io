@@ -1,0 +1,90 @@
+:root {
+  --bg: #272C41;
+  --bg-accent: #1d2131; 
+  --bg-accent2: #444c71; 
+  --fg: #EBE0A2;
+  --fg2: #a0a7c6;
+  --success-bg: #27413c;
+  --success-fg: #94bfb7;
+  --error-bg: #41272c;
+  --error-fg: #b88891;
+}
+  
+body {
+  text-align: center;
+  width: 100%;
+  height: 70vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Arial";
+  background-color: var(--bg);
+  color: var(--fg);
+  overflow-y: hidden;
+}
+
+#hangul-table {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+#hangul-syllables {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+#hangul-display {
+  font-size: 10em;
+  color: var(--fg);
+  margin-top: 20vh;
+  height: 0.65em;
+  transition: color 0.35s ease;
+}
+
+a {
+  color: var(--fg);
+}
+
+button {
+  margin: 5px;
+  background-color: var(--bg-accent2);
+  border-color: var(--bg-accent2);
+  color: var(--fg2);
+  border-radius: 5px;
+  font-size: 1em;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.button-success {
+  background: var(--success-bg) !important;
+  border-color: var(--success-bg) !important;
+  color: var(--success-fg) !important;
+}
+
+.button-error {
+  background: var(--error-bg) !important;
+  border-color: var(--error-bg) !important;
+  color: var(--error-fg) !important;
+}
+
+.correct {
+  color: var(--success-fg) !important;
+}
+
+.incorrect {
+  color: var(--error-fg) !important;
+}

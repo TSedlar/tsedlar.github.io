@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Korean Hangul</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+  </head>
+
+  <body>
+    <script src="../../static/scripts/eltag.min.js"></script>
+    <script src="hangul.js"></script>
+    <script>
+      const { renderElement, app, div, a, img, p, range, button, span } = ElTag;
+
+      const view = app({
+        state: {
+          syllables: false,
+          display: { kr: '?' },
+          answers: ['?', '?', '?', '?']
+        },
+        actions: {
+          toggleSyllables: () => this.setState({ syllables: !this.state.syllables }),
+          choose: () => {
+            const dataSet = this.state.syllables ? HANGUL_SYLLABLES : HANGUL;
+            const chosen = dataSet[Math.floor(Math.random() * dataSet.length)];
+            const filteredDataSet = dataSet.filter(x => x.en !== chosen.en && x.en.length == chosen.en.length);
+            const randomAnswers = [chosen.en];
+            for (let i = 0; i < 3; i++) {
+              let random;
+              do {
+                random = filteredDataSet[Math.floor(Math.random() * filteredDataSet.length)].en;
+              } while (randomAnswers.includes(random));
+              randomAnswers.push(random);
+            }
+            randomAnswers.sort(() => Math.random() - Math.random());
+            this.setState({ display: chosen, answers: randomAnswers });
+          },
+          flash: (element, correct=true) => {
+            const correctClass = element.tagName.toLowerCase() === 'button' ? 'button-success' : 'correct';
+            const incorrectClass = element.tagName.toLowerCase() === 'button' ? 'button-error' : 'incorrect';
+            element.classList.add(correct ? correctClass : incorrectClass);
+            setTimeout(() => {
+              element.classList.remove(correct ? correctClass : incorrectClass);
+            }, 750);
+          },
+          verify: (ref) => {
+            const correct = ref.innerHTML === this.state.display.en;
+            this.actions.flash(ref, correct);
+            this.actions.flash(document.querySelector('#hangul-display'), correct);
+            if (correct) {
+              setTimeout(() => this.actions.choose(), 750);
+            }
+          }
+        }
+      }, [
+        button({
+          id: 'hangul-table',
+          class: 'button-success',
+          onclick: () => location.href = 'static/table.jpg'
+        }, 'View Table'),
+        button({
+          id: 'hangul-syllables',
+          class: 'button-error',
+          onclick: () => {
+            this.ref.classList.toggle('button-success');
+            this.ref.classList.toggle('button-error');
+            this.actions.toggleSyllables();
+            this.actions.choose();
+          },
+          render: () => this.state.syllables ? 'Syllables ✓' : 'Syllables ×'
+        }),
+        p({ id: 'hangul-display', render: () => this.state.display.kr }),
+        ...range(0, 4, (idx, _) => button({
+          state: { idx },
+          render: () => this.parent.state.answers[this.state.idx],
+          onclick: () => this.parent.actions.verify(this.ref)
+        }))
+      ]);
+
+      renderElement(document.body, view, () => this.actions.choose());
+    </script>
+  </body>
+</html>
