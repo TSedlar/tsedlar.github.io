@@ -12,7 +12,7 @@
     <script src="static/scripts/eltag.min.js"></script>
 
     <script>
-      const { renderElement, div, img, picture, source, p, a, h4, i, span, ul, li, article, summary, details } = ElTag
+      const { renderElement, div, img, picture, source, p, a, h4, i, span, ul, li, article, summary, details, br } = ElTag
 
       const Cert = (place, duration, location, gpa, name) => {
         return div([
@@ -50,8 +50,8 @@
         return a({ href: link }, children)
       }
 
-      const Project = (name, summaryText, detailText, links, detailChildren) => {
-        let linkArray = []
+      const Project = (name, summaryText, detailText, top, links, detailChildren) => {
+        let linkArray = [...top, br()]
         if (links && links.length > 0) {
           linkArray.push("Links: ")
           for (let i = 0; i < links.length; i++) {
@@ -208,6 +208,7 @@
               "Learn JP",
               "A mobile application that helps with learning Japanese kana and kanji",
               "Made with NodeJS, HTML, CSS, and Cordova.",
+              [],
               [
                 Link("https://itunes.apple.com/us/app/learn-jp/id1447060691", "App Store", "fa-apple"),
                 Link("https://play.google.com/store/apps/details?id=me.sedlar.learnjp", "Play Store", "fa-android")
@@ -219,6 +220,11 @@
               "Anitrack",
               "A web extension used to track what you're watching with MAL or Kitsu",
               "Made with NodeJS, HTML, and CSS",
+              [
+                img({ src: "https://img.shields.io/github/stars/tsedlar/anitrack.svg?logo=GitHub&label=&color=333333" }),
+                img({ src: "https://img.shields.io/chrome-web-store/d/njndiiinbnllinmdoifoffmkfgkflffp.svg?logo=Google Chrome&logoColor=ffffff&label=&color=333333" }),
+                img({ src: "https://img.shields.io/amo/users/anitrack.svg?logo=Mozilla Firefox&logoColor=ffffff&label=&color=333333" })
+              ],
               [Link("https://github.com/TSedlar/anitrack", "GitHub", "fa-github-alt")],
               ImageArray("./static/images/projects/anitrack/", 0, 0, "png", 200, 220)
             ),
@@ -227,6 +233,9 @@
               "Gr8bar",
               "A cross-platform statusbar made with Python and Qt5",
               "Made with Python and Qt5",
+              [
+                img({ src: "https://img.shields.io/github/stars/tsedlar/gr8bar.svg?logo=GitHub&label=&color=333333" })
+              ],
               [Link("https://github.com/TSedlar/gr8bar", "GitHub", "fa-github-alt")],
               ImageArray("./static/images/projects/gr8bar/", 0, 2, "png", 400, 240)
             ),
@@ -235,6 +244,9 @@
               "GridWM",
               "A program used for desktop workspace organization",
               "Made with Python and Qt5",
+              [
+                img({ src: "https://img.shields.io/github/stars/tsedlar/gridwm.svg?logo=GitHub&label=&color=333333" })
+              ],
               [Link("https://github.com/TSedlar/GridWM", "GitHub", "fa-github-alt")],
               ImageArray("./static/images/projects/gridwm/", 0, 0, "gif", 400, 240)
             ),
@@ -243,6 +255,9 @@
               "Javanalysis",
               "A framework that improves analysis functionality of Javassist",
               "Made with Kotlin",
+              [
+                img({ src: "https://img.shields.io/github/stars/disassemble-io/javanalysis.svg?logo=GitHub&label=&&color=333333" })
+              ],
               [Link("https://github.com/disassemble-io/javanalysis", "GitHub", "fa-github-alt")],
               [
                 p([
@@ -256,8 +271,11 @@
 
             Project(
               "Games Nebula",
-              "An unofficial Linux client for GOG ",
+              "An unofficial Linux client for GOG",
               "Made with Python",
+              [
+                img({ src: "https://img.shields.io/github/stars/yancharkin/games_nebula.svg?logo=GitHub&label=&color=333333" })
+              ],
               [Link("https://github.com/yancharkin/games_nebula", "GitHub", "fa-github-alt")],
               [
                 p([
@@ -274,6 +292,9 @@
               "ElTag",
               "A blazing fast HTML Tag Component Micro-framework",
               "Made with JavaScript",
+              [
+                img({ src: "https://img.shields.io/github/stars/tsedlar/eltag.svg?logo=GitHub&label=&color=333333" })
+              ],
               [Link("https://github.com/TSedlar/eltag", "GitHub", "fa-github-alt")],
               [
                 p([
@@ -289,6 +310,9 @@
               "WaveNet Audiobook",
               "A program that converts text files into an audiobook using Google WaveNet",
               "Made with NodeJS",
+              [
+                img({ src: "https://img.shields.io/github/stars/tsedlar/wavenet-audiobook.svg?logo=GitHub&label=&color=333333" })
+              ],
               [Link("https://github.com/TSedlar/wavenet-audiobook", "GitHub", "fa-github-alt")],
               ImageArray("./static/images/projects/wavenet-audiobook/", 0, 0, "png", 380, 500)
             )

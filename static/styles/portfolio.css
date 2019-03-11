@@ -32,6 +32,11 @@ footer {
   margin-bottom: 12px;
 }
 
+summary > p {
+  position: relative;
+  padding-left: 16px !important;
+}
+
 a {
   color: #000000;
 }
@@ -102,6 +107,11 @@ h4 {
 
 a {
   text-decoration: none;
+}
+
+li {
+  padding: 0;
+  margin-left: -15px;
 }
 
 summary {
@@ -188,6 +198,10 @@ summary {
 
 .inner-details {
   margin-left: 20px;
+}
+
+.inner-details > p > img {
+  padding-right: 3px;
 }
 
 .preview-img {
