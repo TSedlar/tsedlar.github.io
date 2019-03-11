@@ -51,7 +51,10 @@
       }
 
       const Project = (name, summaryText, detailText, top, links, detailChildren) => {
-        let linkArray = [...top, br()]
+        let linkArray = [...top]
+        if (linkArray.length > 0) {
+          linkArray.push(br())
+        }
         if (links && links.length > 0) {
           linkArray.push("Links: ")
           for (let i = 0; i < links.length; i++) {
