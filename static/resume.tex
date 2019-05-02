@@ -6,6 +6,15 @@
     \usepackage[utf8]{inputenc}
     \usepackage[T1]{fontenc}
     \usepackage[margin=1in]{geometry}
+    \usepackage{xcolor}
+    \usepackage{soul}
+    \usepackage{hyperref}
+    \hypersetup{
+        colorlinks=true,
+        linkcolor=blue,
+        filecolor=magenta,      
+        urlcolor=black,
+    }
     \textheight=10in
     \pagestyle{empty}
     \raggedright
@@ -64,21 +73,25 @@
 
 \begin{document}
 \vspace*{-40pt}
+\setul{}{0.25pt}
+\setulcolor{gray}
 
 %==== Profile ====%
 \vspace*{-10pt}
 \begin{center}
 	{\Huge \scshape {Tyler Sedlar}}\\
-	Chandler, AZ $\cdot$ sedlarizona@gmail.com $\cdot$ (480) 685-1959 $\cdot$ sedlar.me\\
+	Chandler, AZ $\cdot$ \href{mailto:sedlarizona@gmail.com}{sedlarizona@gmail.com} $\cdot$ (480) 685-1959 $\cdot$ \href{https://sedlar.me/}{sedlar.me}\\
 \end{center}
 
 %==== Education ====%
 \header{Education}
 \textbf{Rio Salado College}\hfill Tempe, AZ\\
-AAS Mobile Application Programming, \textit{3.6 GPA} \hfill 2018 - 2020\\
+AAS Mobile Application Programming, \hfill 2018 - 2020\\
+\textit{3.67 \href{https://docs.google.com/spreadsheets/d/143DmVdsyjRVbH1ftcySxflvuNjioncAvJpj0vFbzpA8/edit?usp=sharing}{\ul{GPA}}, 3.9 in major}\\
 \vspace{2mm}
 \textbf{Rio Salado College}\hfill Tempe, AZ\\
-CCL Programming, \textit{3.6 GPA} \hfill 2018 - 2019\\
+CCL Programming, \hfill 2018 - 2019\\
+\textit{3.9 \href{https://docs.google.com/spreadsheets/d/143DmVdsyjRVbH1ftcySxflvuNjioncAvJpj0vFbzpA8/edit?usp=sharing}{\ul{GPA}}}\\
 \vspace{2mm}
 
 %==== Experience ====%
@@ -114,29 +127,44 @@ CCL Programming, \textit{3.6 GPA} \hfill 2018 - 2019\\
 \header{Skills}
 \vspace{2mm}
 \begin{tabular}{ l l }
-	Programming Languages: & Java, Kotlin, JavaScript, NodeJS, Python, MySQL, HTML, PHP, CSS \\
-	Frameworks:            & ReactJS, Angular 2, Express, Mongoose, jQuery, Cordova          \\
-	Tools:                 & Git, Maven, Gradle, MySQL Workbench, Atom, VSCode, IntelliJ     \\
+	Programming Languages: & Java, Kotlin, JavaScript, NodeJS, Python, MySQL, HTML, PHP, CSS    \\
+	Frameworks:            & ReactJS, Angular 2, Express, Mongoose, jQuery, Cordova
+	\vspace{0.5mm}\\
+	Tools:                 & Git, Maven, Gradle, MySQL Workbench, Atom, VSCode, IntelliJ
+	\vspace{0.5mm}\\
+	Typing:                & \href{https://data.typeracer.com/misc/badge?user=tsedlar}{\ul{Top 0.1\%}}, 113 WPM Average
+	\vspace{0.5mm}\\
+	Other:                 & PhotoShop CC 2019, Microsoft Office Suite 2016  \\
 \end{tabular}
 \vspace{2mm}
 
 \header{Projects}
-{\textbf{Learn JP}}\\
+{\textbf{\href{https://itunes.apple.com/us/app/learn-jp/id1447060691}{\ul{Learn JP}}}}\\
+\vspace*{1mm}
 A mobile application that helps with learning Japanese kana and kanji\\
 \vspace*{2mm}
-{\textbf{Anitrack}}\\
-A web extension used to track what you\textquotesingle{}re watching with MAL or Kitsu\\
+{\textbf{\href{https://github.com/TSedlar/anitrack}{\ul{Anitrack}}}}\\
+\vspace*{1mm}
+A web extension used to sync animation media progress with 3rd party trackers\\
 \vspace*{2mm}
-{\textbf{Gr8bar}}\\
-A cross-platform statusbar made with Python and Qt5\\
+{\textbf{\href{https://github.com/TSedlar/gr8bar}{\ul{Gr8bar}}}}\\
+\vspace*{1mm}
+A cross-platform status bar made with Python and Qt5\\
 \vspace*{2mm}
-{\textbf{GridWM}}\\
+{\textbf{\href{https://github.com/FThompson/RuneDream-API}{\ul{RuneDream}}}}\\
+\vspace*{1mm}
+A now defunct automation client for the MMORPG RuneScape that served over 50,000 users\\
+\vspace*{2mm}
+{\textbf{\href{https://github.com/TSedlar/GridWM}{\ul{GridWM}}}}\\
+\vspace*{1mm}
 A program used for desktop workspace organization\\
 \vspace*{2mm}
-{\textbf{Javanalysis}}\\
+{\textbf{\href{https://github.com/disassemble-io/javanalysis}{\ul{Javanalysis}}}}\\
+\vspace*{1mm}
 A framework that improves analysis functionality of Javassist\\
 \vspace*{2mm}
-{\textbf{WaveNet Audiobook}}\\
+{\textbf{\href{https://github.com/TSedlar/wavenet-audiobook}{\ul{WaveNet Audiobook}}}}\\
+\vspace*{1mm}
 A program that converts text files into an audiobook using Google WaveNet\\
 \vspace*{2mm}
 
