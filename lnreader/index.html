@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LNReader</title>
+  <style>
+    @font-face {
+      font-family: 'Dosis';
+      font-style: normal;
+      font-weight: 400;
+      font-display: auto;
+      src:
+        local("Dosis"),
+        url("../static/fonts/Dosis-Regular.woff") format('woff');
+    }
+
+    :root {
+      --bg-color: #161a21;
+      --primary-color: #1d222c;
+      --fg-color: #dad8cc;
+      --fg-accent-color: #ffffff;
+      --fg-underline: rgba(255, 255, 255, 0.3);
+    }
+
+    html,
+    body {
+      height: 100%;
+      background: var(--bg-color);
+      color: var(--fg-color);
+      font-family: "Dosis", Helvetica, Arial, sans-serif;
+    }
+
+    a {
+      text-decoration: underline;
+      text-decoration-color: var(--fg-underline);
+      color: inherit;
+    }
+
+    .hover-anim,
+    a:hover {
+      color: var(--fg-accent-color);
+      outline: 0;
+      border: 0;
+      text-decoration: none;
+      -webkit-transition: color 0.2s ease-out;
+      -moz-transition: color 0.2s ease-out;
+      -ms-transition: color 0.2s ease-out;
+      -o-transition: color 0.2s ease-out;
+      transition: color 0.2s ease-out;
+    }
+
+    .header,
+    .aligned-image {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .header {
+      align-self: center;
+    }
+
+    .aligned-image {
+      padding-bottom: 5px;
+      font-size: 2.25vh;
+    }
+
+    .aligned-image img {
+      padding-right: 8px;
+    }
+
+    .header span {
+      font-size: 2.75em;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-items: center;
+      align-content: center;
+      justify-content: center;
+      align-self: center;
+    }
+
+    #content {
+      width: 98%;
+      margin-left: 1%;
+      margin-right: 1%;
+      padding: 0;
+      padding-bottom: 20px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-items: center;
+      justify-content: center;
+    }
+
+    #left-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-basis: 315px;
+      flex-shrink: 0;
+      padding-right: 1%;
+    }
+
+    /* let it grow when it's on its own line */
+    @media only screen and (max-width: 767px) {
+      #left-column {
+        flex-grow: 1;
+      }
+    }
+
+    #left-column img {
+      width: 315px;
+      height: 560px;
+      padding-bottom: 20px;
+    }
+
+    #right-column {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 1;
+    }
+
+    #column-a {
+      flex-grow: 1;
+      padding-right: 1%;
+    }
+
+    #column-a ul {
+      padding: 0;
+      padding-left: 8px;
+    }
+
+    #column-b {
+      flex-grow: 1;
+    }
+
+    #column-b p,
+    #column-b a {
+      font-size: 2.5vh;
+    }
+
+    #column-b .fa {
+      width: 40px;
+      font-size: 30px;
+      margin-top: -3px;
+      margin-right: 8px;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      border-bottom: 1px solid var(--fg-color);
+      padding: 0;
+      margin: 0;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+    }
+
+    .spacer {
+      width: 100%;
+      height: 8px;
+    }
+
+    .subhead {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="../static/scripts/modernizr.min.js"></script>
+  <script src="../static/scripts/eltag.min.js"></script>
+
+  <script>
+    const { renderElement, div, h1, img, span, p, h2, h3, ul, li, a, i } = ElTag
+
+    const aggregators = [
+      {
+        lang: 'English',
+        list: [
+          { id: 'novel_updates', name: 'Novel Updates', url: 'https://www.novelupdates.com/' },
+          { id: 'novel_planet', name: 'Novel Planet', url: 'https://novelplanet.com/' },
+          { id: 'wuxia_world_online', name: 'Wuxia World', url: 'https://wuxiaworld.online/' },
+          { id: 'novel_spread', name: 'Novel Spread', url: 'https://www.novelspread.com/' },
+          { id: 'box_novel', name: 'Box Novel', url: 'https://boxnovel.com/' },
+        ],
+      },
+      {
+        lang: 'Spanish',
+        list: [
+          { id: 'sky_novels', name: 'Sky Novels', url: 'https://www.skynovels.net/' },
+        ],
+      },
+      {
+        lang: 'French',
+        list: [
+          { id: 'baka_novel', name: 'Baka Novel', url: 'https://www.bakanovel.com/' },
+        ],
+      },
+      {
+        lang: 'Vietnamese',
+        list: [
+          { id: 'hako', name: 'Hako', url: 'https://ln.hako.re/' },
+        ],
+      },
+      {
+        lang: 'Indian',
+        list: [
+          { id: 'neu_manga', name: 'Neu Manga', url: 'https://neumanga.tv/' },
+        ],
+      },
+    ];
+
+    const mkScreenshots = () => div({ id: 'left-column' }, [
+      h1({
+        style: { width: '100%' }
+      }, 'Screenshots'),
+      div({ id: 'screenshots' }, [
+        img({ src: 'static/images/screenshots/ss1.png' }),
+        img({ src: 'static/images/screenshots/ss2.png' }),
+        img({ src: 'static/images/screenshots/ss3.png' }),
+        img({ src: 'static/images/screenshots/ss4.png' }),
+        img({ src: 'static/images/screenshots/ss5.png' }),
+        img({ src: 'static/images/screenshots/ss6.png' }),
+        img({ src: 'static/images/screenshots/ss7.png' }),
+      ]),
+    ]);
+
+    const mkInfo = () => div({ id: 'right-column' }, [
+      // Middle Column
+      div({ id: 'column-a' }, [
+        h1('Sources'),
+        div({ class: 'spacer' }),
+        ...aggregators.map(entry => div([
+          h2({ class: 'subhead' }, entry.lang),
+          ul(entry.list.map(aggregator => div([
+            li({ class: 'aligned-image' }, [
+              img({
+                src: `static/images/aggregators/${aggregator.id}.png`,
+                width: 40,
+                height: 40,
+              }),
+              a({ href: aggregator.url }, [
+                aggregator.name,
+              ]),
+            ]),
+          ])))
+        ])),
+      ]),
+      // Right Column
+      div({ id: 'column-b' }, [
+        // Link section
+        h1('Links'),
+        p([
+          i({ class: 'fa fa-apple' }),
+          a({
+            href: '#'
+          }, 'App Store'),
+        ]),
+        p([
+          i({ class: 'fa fa-play' }),
+          a({
+            href: 'https://play.google.com/store/apps/details?id=me.sedlar.ln_reader'
+          }, 'Play Store'),
+        ]),
+        p([
+          i({ class: 'fa fa-android' }),
+          a({
+            href: '#'
+          }, 'F-Droid'),
+        ]),
+        p([
+          i({ class: 'fa fa-github' }),
+          a({
+            href: 'https://github.com/TSedlar/LNReader'
+          }, 'GitHub'),
+        ]),
+        // Support section
+        h1('Support'),
+        p([
+          i({ class: 'fa fa-coffee' }),
+          a({
+            href: 'https://www.patreon.com/bePatron?c=954360'
+          }, 'Be a Patron'),
+        ]),
+        p([
+          i({ class: 'fa fa-paypal' }),
+          a({
+            href: 'https://paypal.me/TSedlar'
+          }, 'PayPal'),
+        ]),
+        // Help section
+        h1('Help'),
+        p([
+          i({ class: 'fa fa-bug' }),
+          a({
+            href: 'https://github.com/TSedlar/LNReader/issues/new'
+          }, 'Report Issue'),
+        ]),
+        p([
+          i({ class: 'fa fa-lock' }),
+          a({
+            href: 'https://sedlar.me/static/policy/lnreader-privacy.html'
+          }, 'Privacy Policy'),
+        ]),
+        p([
+          i({ class: 'fa fa-envelope' }),
+          a({
+            href: 'mailto:LNReader@sedlar.me'
+          }, 'E-Mail'),
+        ]),
+      ]),
+    ]);
+
+    const main = div({ id: 'container' }, [
+      div({ class: 'header' }, [
+        img({ src: 'static/images/icon_foreground_1080.png', width: 80, height: 80, }),
+        span('LNReader'),
+      ]),
+
+      div({ id: 'content' }, [
+        // Right column
+        mkScreenshots(),
+        // Left column
+        mkInfo(),
+      ]),
+    ]);
+
+    renderElement(document.body, main);
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="static/styles/tiny-slider.css" />
+  <script src="static/scripts/tiny-slider.js"></script>
+  <script>
+    tns({
+      controls: false,
+      container: '#screenshots',
+      items: 1,
+      slideBy: 1,
+      mouseDrag: true,
+      swipeAngle: false,
+      speed: 750,
+      axis: 'horizontal',
+      autoplay: true,
+      autoplayButtonOutput: false,
+      nav: false,
+      autoplayHoverPause: true,
+      autoplayTimeout: 3500,
+      autoWidth: true,
+      lazyload: true,
+      fixedWidth: 315,
+    });
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="../static/styles/font-awesome.min.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="static/style.css" /> -->
+</body>
+
+</html>
