@@ -5,7 +5,7 @@
     font-display: auto;
     src:
       local("Dosis"),
-      url("../../static/fonts/Dosis-Regular.woff") format('woff');
+      url("../../../static/fonts/Dosis-Regular.woff") format('woff');
   }
   
   :root {
