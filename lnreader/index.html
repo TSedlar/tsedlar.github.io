@@ -27,7 +27,6 @@
 
     html,
     body {
-      height: 100%;
       background: var(--bg-color);
       color: var(--fg-color);
       font-family: "Dosis", Helvetica, Arial, sans-serif;
@@ -155,6 +154,17 @@
       margin-right: 8px;
       vertical-align: middle;
       text-align: center;
+    }
+
+    #screenshots {
+      max-width: 315px;
+    }
+
+    /* let it grow when it's on its own line */
+    @media only screen and (min-width: 630px) and (max-width: 767px) {
+      #screenshots {
+        max-width: 630px;
+      }
     }
 
     h1,
@@ -361,8 +371,6 @@
       autoplayHoverPause: true,
       autoplayTimeout: 3500,
       autoWidth: true,
-      lazyload: true,
-      fixedWidth: 315,
     });
   </script>
 
