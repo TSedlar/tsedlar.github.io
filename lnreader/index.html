@@ -56,14 +56,17 @@
       h1({
         style: { width: '100%' }
       }, 'Screenshots'),
-      div({ id: 'screenshots' }, [
-        img({ src: 'static/images/screenshots/ss1.png' }),
-        img({ src: 'static/images/screenshots/ss2.png' }),
-        img({ src: 'static/images/screenshots/ss3.png' }),
-        img({ src: 'static/images/screenshots/ss4.png' }),
-        img({ src: 'static/images/screenshots/ss5.png' }),
-        img({ src: 'static/images/screenshots/ss6.png' }),
-        img({ src: 'static/images/screenshots/ss7.png' }),
+      div({ id: 'screenshots', class: 'swiper-container' }, [
+        div({ class: 'swiper-wrapper' }, [
+          div({ class: 'swiper-slide' }, [img({ src: 'static/images/screenshots/ss1.png' })]),
+          div({ class: 'swiper-slide' }, [img({ src: 'static/images/screenshots/ss2.png' })]),
+          div({ class: 'swiper-slide' }, [img({ src: 'static/images/screenshots/ss3.png' })]),
+          div({ class: 'swiper-slide' }, [img({ src: 'static/images/screenshots/ss4.png' })]),
+          div({ class: 'swiper-slide' }, [img({ src: 'static/images/screenshots/ss5.png' })]),
+          div({ class: 'swiper-slide' }, [img({ src: 'static/images/screenshots/ss6.png' })]),
+          div({ class: 'swiper-slide' }, [img({ src: 'static/images/screenshots/ss7.png' })]),
+        ]),
+        div({ class: 'swiper-pagination' }),
       ]),
     ]);
 
@@ -170,25 +173,24 @@
     renderElement(document.body, main);
   </script>
 
-  <link rel="stylesheet" type="text/css" href="static/styles/tiny-slider.css" />
-  <script src="static/scripts/tiny-slider.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/styles/swiper.min.css" />
+  <script src="static/scripts/swiper.min.js"></script>
   <script>
-    tns({
-      controls: false,
-      container: '#screenshots',
-      items: 1,
-      slideBy: 'page',
-      mouseDrag: true,
-      swipeAngle: false,
-      speed: 750,
-      axis: 'horizontal',
-      autoplay: true,
-      autoplayButtonOutput: false,
-      nav: false,
-      autoplayHoverPause: false,
-      autoplayTimeout: 3500,
-      autoWidth: true,
+    var swiper = new Swiper('#screenshots', {
+      loop: true,
+      speed: 400,
+      spaceBetween: 0,
+      width: 315,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
     });
+    swiper.startAutoplay();
   </script>
 
   <link rel="stylesheet" type="text/css" href="../static/styles/font-awesome.min.css" />

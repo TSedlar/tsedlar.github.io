@@ -148,7 +148,12 @@
   }
   
   #screenshots {
+    min-width: 315px;
+    min-height: 595px;
     max-width: 315px;
+    max-height: 595px;
+    margin: 0;
+    padding: 0;
   }
   
   /* let it grow when it's on its own line */
@@ -156,6 +161,10 @@
     #screenshots {
       max-width: 630px;
     }
+  }
+
+  .swiper-pagination-bullet {
+    background: var(--fg-color);
   }
   
   h1,
