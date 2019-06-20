@@ -1,94 +1,99 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tyler Sedlar</title>
-  </head>
 
-  <body>
-    <script src="static/scripts/modernizr.min.js"></script>
-    <script src="static/scripts/eltag.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tyler Sedlar</title>
+</head>
 
-    <script>
-      const { renderElement, div, img, picture, source, p, a, h4, i, span, ul, li, article, summary, details, br } = ElTag
+<body>
+  <script src="static/scripts/modernizr.min.js"></script>
+  <script src="static/scripts/eltag.min.js"></script>
 
-      const Cert = (place, duration, location, gpa, name) => {
-        return div([
-          p([
-            span({ class: "bold" }, place),
-            span({ class: "right" }, duration)
-          ]),
-          p([
-            span(location),
-            span({ class: "right" }, gpa)
-          ]),
-          p(name),
-        ])
+  <script>
+    const { renderElement, div, img, picture, source, p, a, h4, i, span, ul, li, article, summary, details, br } = ElTag
+
+    let slideshowCount = 0;
+
+    const Cert = (place, duration, location, gpa, name) => {
+      return div([
+        p([
+          span({ class: "bold" }, place),
+          span({ class: "right" }, duration)
+        ]),
+        p([
+          span(location),
+          span({ class: "right" }, gpa)
+        ]),
+        p(name),
+      ])
+    }
+
+    const Job = (place, location, title, duration, achievements) => {
+      return div([
+        p([
+          span({ class: "bold" }, place),
+          span({ class: "right" }, location)
+        ]),
+        p([
+          span(title),
+          span({ class: "right" }, duration)
+        ]),
+        ul(achievements.map(achievement => li(achievement)))
+      ])
+    }
+
+    const Link = (link, name, icon = null) => {
+      const children = [name]
+      if (icon) {
+        children.push(i({ class: `fa ${icon}` }))
       }
+      return a({ href: link }, children)
+    }
 
-      const Job = (place, location, title, duration, achievements) => {
-        return div([
-          p([
-            span({ class: "bold" }, place),
-            span({ class: "right" }, location)
-          ]),
-          p([
-            span(title),
-            span({ class: "right" }, duration)
-          ]),
-          ul(achievements.map(achievement => li(achievement)))
-        ])
+    const Project = (name, summaryText, detailText, top, links, detailChildren) => {
+      let linkArray = [...top]
+      if (linkArray.length > 0) {
+        linkArray.push(br())
       }
-
-      const Link = (link, name, icon=null) => {
-        const children = [name]
-        if (icon) {
-          children.push(i({ class: `fa ${icon}`}))
-        }
-        return a({ href: link }, children)
-      }
-
-      const Project = (name, summaryText, detailText, top, links, detailChildren) => {
-        let linkArray = [...top]
-        if (linkArray.length > 0) {
-          linkArray.push(br())
-        }
-        if (links && links.length > 0) {
-          linkArray.push("Links: ")
-          for (let i = 0; i < links.length; i++) {
-            if (i > 0) {
-              linkArray.push(", ")
-            }
-            linkArray.push(links[i])
+      if (links && links.length > 0) {
+        linkArray.push("Links: ")
+        for (let i = 0; i < links.length; i++) {
+          if (i > 0) {
+            linkArray.push(", ")
           }
+          linkArray.push(links[i])
         }
-        let detailArray = []
-        if (detailChildren && detailChildren.length > 0) {
-          detailArray = detailChildren
-        }
-        return article([
-          details({
-            state: { linkArray, detailText, detailArray },
-            onclick: () => {
-              if (!this.ref.open) {
-                while (this.ref.lastChild && this.ref.children.length > 1) { // keep summary
-                  this.ref.removeChild(this.ref.lastChild)
-                }
-                const innerDetails = div({ class: "inner-details" }, [
-                  p(this.state.linkArray),
-                  p(this.state.detailText),
-                  ...this.state.detailArray.map(x => {
-                    if (x instanceof Element || x instanceof HTMLDocument) {
-                      return x
-                    } else {
-                      return img(x)
-                    }
-                  })
-                ])
-                this.ref.appendChild(innerDetails)
-                const imgs = innerDetails.querySelectorAll(".preview-img")
+      }
+      let detailArray = []
+      if (detailChildren && detailChildren.length > 0) {
+        detailArray = detailChildren
+      }
+      return article([
+        details({
+          state: { linkArray, detailText, detailArray },
+          onclick: () => {
+            if (!this.ref.open) {
+              while (this.ref.lastChild && this.ref.children.length > 1) { // keep summary
+                this.ref.removeChild(this.ref.lastChild)
+              }
+
+              const innerDetails = div({ class: "inner-details" }, [
+                p(this.state.linkArray),
+                p(this.state.detailText),
+                ...this.state.detailArray,
+              ])
+
+              this.ref.appendChild(innerDetails)
+
+              let slideshow = this.state.detailArray.find(x => x.id !== undefined && x.id.includes('slideshow-'));
+
+              if (slideshow !== undefined) {
+                const img = slideshow.querySelector('img');
+                const imgs = slideshow.querySelectorAll('img');
+
                 for (let img of imgs) {
                   img.onclick = () => {
                     const modalImage = document.getElementById("modal-image")
@@ -96,237 +101,285 @@
                     showModal(true)
                   }
                 }
+
+                if (img != null) {
+                  const slideshowId = slideshow.getAttribute('id');
+                  const slider = new Swiper('#' + slideshowId, {
+                    loop: true,
+                    speed: 400,
+                    spaceBetween: 0,
+                    width: img.width,
+                    autoplay: {
+                      delay: 2500,
+                      disableOnInteraction: false,
+                    },
+                    pagination: {
+                      el: '.swiper-pagination',
+                      clickable: true,
+                    },
+                  });
+                }
               }
             }
-          }, [
+          }
+        }, [
             summary([
               span({ class: "bold" }, name),
               p(summaryText)
             ])
           ])
-        ])
-      }
+      ])
+    }
 
-      const showModal = (showing) => {
-        const modal = document.getElementById("image-modal")
-        modal.style.display = showing ? "block" : "none"
-      }
-
-      const ImageArray = (folder, min, max, ext, previewWidth, previewHeight) => {
-        const images = []
-        for (let i = min; i <= max; i++) {
-          const image = `${folder}${i}.${ext}`
-          images.push({ class: "preview-img", "src": image, width: previewWidth, height: previewHeight })
+    const ImageArray = (folder, min, max, ext, previewWidth, previewHeight) => {
+      const images = []
+      for (let i = min; i <= max; i++) {
+        const image = `${folder}${i}.${ext}`
+        const sources = []
+        if (ext !== 'gif') {
+          sources.push(source({ srcset: `${folder}${i}.webp`, type: "image/webp" }))
         }
-        return images
+        sources.push(source({ srcset: `${folder}${i}.${ext}`, type: `image/${ext}` }));
+        sources.push(img({
+          width: previewWidth,
+          height: previewHeight,
+          style: {
+            borderRadius: '5px'
+          }
+        }))
+        images.push(picture(sources))
       }
+      slideshowCount++;
+      return div({
+        id: `slideshow-${slideshowCount}`,
+        class: "swiper-container",
+        style: {
+          left: 0,
+          marginLeft: 0,
+          width: `${previewWidth}px`,
+          minWidth: `${previewWidth}px`,
+          maxWidth: `${previewWidth}px`,
+          height: `${previewHeight + 40}px`,
+          minHeight: `${previewHeight + 40}px`,
+          maxHeight: `${previewHeight + 40}px`,
+        },
+      }, [
+        div({ class: "swiper-wrapper" }, images.map(img => div({ class: "swiper-slide" }, [img]))),
+        div({ class: 'swiper-pagination' }),
+      ])
+    }
 
-      const view = div({ id: "content" }, [
-        div({ id: "image-modal", class: "modal", onclick: () => { showModal(false) } }, [
-          span({ class: "close", onclick: () => { showModal(false) }}, "x"),
-          img({ id: "modal-image", class: "modal-content"})
+    const showModal = (showing) => {
+      const modal = document.getElementById("image-modal")
+      modal.style.display = showing ? "block" : "none"
+    }
+
+    const view = div({ id: "content" }, [
+      div({ id: "image-modal", class: "modal", onclick: () => { showModal(false) } }, [
+        span({ class: "close", onclick: () => { showModal(false) }}, "x"),
+        img({ id: "modal-image", class: "modal-content"})
+      ]),
+
+      div({ id: "cover", class: "header" }),
+
+      div({ class: "avatar-container" }, [
+        picture([
+          source({ srcset: "./static/images/avatar.webp", type: "image/webp" }),
+          source({ srcset: "./static/images/avatar.jpg", type: "image/jpeg" }),
+          img({ id: "avatar" })
+        ])
+      ]),
+
+      div({ id: "resume" }, [
+        div({ id: "left-column" }, [
+          /* About */
+          h4("About"),
+
+          p([
+            span("I'm "),
+            span({ class: "bold" }, "Tyler Sedlar.")
+          ]),
+          div({ class: "spacer" }),
+
+          p("I'm a passionate software developer who likes using Java, Kotlin, Python, and NodeJS."),
+          div({ class: "spacer" }),
+
+          p("I enjoy music, gaming, and sports."),
+          div({ class: "spacer" }),
+
+          p([a({ href: "https://github.com/TSedlar" }, "GitHub.com/TSedlar")]),
+          p([a({ href: "https://linkedin.com/in/TSedlar" }, "LinkedIn.com/in/TSedlar")]),
+          p([a({ href: "mailto:sedlarizona@gmail.com" }, "sedlarizona@gmail.com")]),
+          p([a({ href: "./static/resume.pdf" }, ["Résumé", i({ class: "fa fa-external-link" })])]),
+
+          /* Education */
+          h4("Education"),
+
+          Cert("Rio Salado College", "2018-2020", "Tempe, AZ", "3.67 GPA. 3.9 in major", "AAS Mobile Application Programming"),
+          Cert("Rio Salado College", "2018-2019", "Tempe, AZ", "3.9 GPA", "CCL Programming"),
+
+          /* Skills */
+          h4("Skills"),
+
+          p({ class: "bold" }, "Programming Languages:"),
+          p("Java, Kotlin, JavaScript, NodeJS, Python, Dart, MySQL, HTML, PHP, CSS"),
+
+          p({ class: "bold" }, "Frameworks:"),
+          p("Flutter, ReactJS, Angular 2, Express, Mongoose, jQuery, Cordova"),
+
+          p({ class: "bold" }, "Tools:"),
+          p("Git, Maven, Gradle, MySQL Workbench, Atom, VSCode, IntelliJ")
         ]),
 
-        div({ id: "cover", class: "header" }),
+        div({ id: "right-column" }, [
+          /* Experience */
+          h4("Experience"),
 
-        div({ class: "avatar-container" }, [
-            picture([
-              source({ srcset: "./static/images/avatar.webp", type: "image/webp" }),
-              source({ srcset: "./static/images/avatar.jpg", type: "image/jpeg" }),
-              img({ id: "avatar" })
-            ])
-        ]),
-
-        div({ id: "resume" }, [
-          div({ id: "left-column" }, [
-            /* About */
-            h4("About"),
-
-            p([
-              span("I'm "),
-              span({ class: "bold"}, "Tyler Sedlar.")
-            ]),
-            div({ class: "spacer" }),
-
-            p("I'm a passionate software developer who likes using Java, Kotlin, Python, and NodeJS."),
-            div({ class: "spacer" }),
-
-            p("I enjoy music, gaming, and sports."),
-            div({ class: "spacer" }),
-            
-            p([a({ href: "https://github.com/TSedlar" }, "GitHub.com/TSedlar")]),
-            p([a({ href: "https://linkedin.com/in/TSedlar" }, "LinkedIn.com/in/TSedlar")]),
-            p([a({ href: "mailto:sedlarizona@gmail.com" }, "sedlarizona@gmail.com")]),
-            p([a({ href: "./static/resume.pdf" }, ["Résumé", i({ class: "fa fa-external-link" })])]),
-
-            /* Education */
-            h4("Education"),
-
-            Cert("Rio Salado College", "2018-2020", "Tempe, AZ", "3.67 GPA. 3.9 in major", "AAS Mobile Application Programming"),
-            Cert("Rio Salado College", "2018-2019", "Tempe, AZ", "3.9 GPA", "CCL Programming"),
-
-            /* Skills */
-            h4("Skills"),
-
-            p({ class: "bold" }, "Programming Languages:"),
-            p("Java, Kotlin, JavaScript, NodeJS, Python, Dart, MySQL, HTML, PHP, CSS"),
-
-            p({ class: "bold" }, "Frameworks:"),
-            p("Flutter, ReactJS, Angular 2, Express, Mongoose, jQuery, Cordova"),
-
-            p({ class: "bold" }, "Tools:"),
-            p("Git, Maven, Gradle, MySQL Workbench, Atom, VSCode, IntelliJ")
+          /* Freelance Job */
+          Job("Freelance", "Chandler, AZ", "Full Stack Developer", "2014-Now", [
+            "Created a Java bytecode analysis library written with NodeJS",
+            "Built a Java bytecode control flow library using ASM",
+            "Authored macro software for an MMO using color analysis",
+            "Wrote a web extension that syncs animated/comic media progress",
+            "Composed a Java-Agent used to view runtime method data"
           ]),
 
-          div({ id: "right-column" }, [
-            /* Experience */
-            h4("Experience"),
+          /* G4P Job */
+          Job("Gold4Players LLC", "Miami, FL", "Remote Full Stack Developer", "2013-2014", [
+            "Re-engineered Java bytecode for runtime reflection or proxying",
+            "Created a plugin repository web application with PHP",
+            "Managed plugins using MySQL and MySQL Workbench"
+          ]),
 
-            /* Freelance Job */
-            Job("Freelance", "Chandler, AZ", "Full Stack Developer", "2014-Now", [
-              "Created a Java bytecode analysis library written with NodeJS",
-              "Built a Java bytecode control flow library using ASM",
-              "Authored macro software for an MMO using color analysis",
-              "Wrote a web extension that syncs animated/comic media progress",
-              "Composed a Java-Agent used to view runtime method data"
-            ]),
+          /* Dequeue Job */
+          Job("Dequeue Ltd", "Holborn, London", "Remote Java Software Developer", "2010-2013", [
+            "Published plugins to a centralized repository for public use",
+            "Maintained and monetized plugins for long lengths of time"
+          ]),
 
-            /* G4P Job */
-            Job("Gold4Players LLC", "Miami, FL", "Remote Full Stack Developer", "2013-2014", [
-              "Re-engineered Java bytecode for runtime reflection or proxying",
-              "Created a plugin repository web application with PHP",
-              "Managed plugins using MySQL and MySQL Workbench"
-            ]),
+          /* Projects */
+          h4("Projects"),
 
-            /* Dequeue Job */
-            Job("Dequeue Ltd", "Holborn, London", "Remote Java Software Developer", "2010-2013", [
-              "Published plugins to a centralized repository for public use",
-              "Maintained and monetized plugins for long lengths of time"
-            ]),
+          Project(
+            "LNReader",
+            "A flutter application for reading novels",
+            "Made with Dart and Flutter",
+            [
+              img({ src: "https://img.shields.io/github/stars/tsedlar/lnreader.svg?logo=GitHub&label=&color=333333" })
+            ],
+            [
+              Link("https://github.com/TSedlar/LNReader", "GitHub", "fa-github-alt"),
+              Link("#", "App Store", "fa-apple"),
+              Link("https://play.google.com/store/apps/details?id=me.sedlar.ln_reader", "Play Store", "fa-android"),
+            ],
+            [ImageArray("./lnreader/static/images/screenshots/ss", 1, 7, "png", 270, 480)]
+          ),
 
-            /* Projects */
-            h4("Projects"),
+          Project(
+            "Dokusho",
+            "A flutter application for reading manga",
+            "Made with Dart and Flutter",
+            [
+              img({ src: "https://img.shields.io/github/stars/tsedlar/dokusho.svg?logo=GitHub&label=&color=333333" })
+            ],
+            [Link("https://github.com/TSedlar/dokusho", "GitHub", "fa-github-alt")],
+            [ImageArray("./static/images/projects/dokusho/", 0, 3, "png", 270, 480)]
+          ),
 
-            Project(
-              "Dokusho",
-              "A flutter application for reading manga",
-              "Made with Dart and Flutter",
-              [
-                img({ src: "https://img.shields.io/github/stars/tsedlar/dokusho.svg?logo=GitHub&label=&color=333333" })
-              ],
-              [Link("https://github.com/TSedlar/dokusho", "GitHub", "fa-github-alt")],
-              ImageArray("./static/images/projects/dokusho/", 0, 3, "png", 70, 100)
-            ),
+          Project(
+            "Learn JP",
+            "A mobile application that helps with learning Japanese kana and kanji",
+            "Made with NodeJS, HTML, CSS, and Cordova.",
+            [],
+            [
+              Link("https://itunes.apple.com/us/app/learn-jp/id1447060691", "App Store", "fa-apple"),
+              Link("https://play.google.com/store/apps/details?id=me.sedlar.learnjp", "Play Store", "fa-android")
+            ],
+            [ImageArray("./static/images/projects/learnjp/", 0, 4, "png", 270, 480)]
+          ),
 
-            Project(
-              "Learn JP",
-              "A mobile application that helps with learning Japanese kana and kanji",
-              "Made with NodeJS, HTML, CSS, and Cordova.",
-              [],
-              [
-                Link("https://itunes.apple.com/us/app/learn-jp/id1447060691", "App Store", "fa-apple"),
-                Link("https://play.google.com/store/apps/details?id=me.sedlar.learnjp", "Play Store", "fa-android")
-              ],
-              ImageArray("./static/images/projects/learnjp/", 0, 4, "png", 70, 100)
-            ),
+          Project(
+            "Anitrack",
+            "A web extension used to sync animated/comic media progress with 3rd party trackers",
+            "Made with NodeJS, HTML, and CSS",
+            [
+              img({ src: "https://img.shields.io/github/stars/tsedlar/anitrack.svg?logo=GitHub&label=&color=333333" }),
+              img({ src: "https://img.shields.io/chrome-web-store/d/njndiiinbnllinmdoifoffmkfgkflffp.svg?logo=Google Chrome&logoColor=ffffff&label=&color=333333" }),
+              img({ src: "https://img.shields.io/amo/users/anitrack.svg?logo=Mozilla Firefox&logoColor=ffffff&label=&color=333333" })
+            ],
+            [Link("https://github.com/TSedlar/anitrack", "GitHub", "fa-github-alt")],
+            [ImageArray("./static/images/projects/anitrack/", 0, 0, "png", 200, 220)]
+          ),
 
-            Project(
-              "Anitrack",
-              "A web extension used to sync animated/comic media progress with 3rd party trackers",
-              "Made with NodeJS, HTML, and CSS",
-              [
-                img({ src: "https://img.shields.io/github/stars/tsedlar/anitrack.svg?logo=GitHub&label=&color=333333" }),
-                img({ src: "https://img.shields.io/chrome-web-store/d/njndiiinbnllinmdoifoffmkfgkflffp.svg?logo=Google Chrome&logoColor=ffffff&label=&color=333333" }),
-                img({ src: "https://img.shields.io/amo/users/anitrack.svg?logo=Mozilla Firefox&logoColor=ffffff&label=&color=333333" })
-              ],
-              [Link("https://github.com/TSedlar/anitrack", "GitHub", "fa-github-alt")],
-              ImageArray("./static/images/projects/anitrack/", 0, 0, "png", 200, 220)
-            ),
+          Project(
+            "Gr8bar",
+            "A cross-platform statusbar made with Python and Qt5",
+            "Made with Python and Qt5",
+            [
+              img({ src: "https://img.shields.io/github/stars/tsedlar/gr8bar.svg?logo=GitHub&label=&color=333333" })
+            ],
+            [Link("https://github.com/TSedlar/gr8bar", "GitHub", "fa-github-alt")],
+            [ImageArray("./static/images/projects/gr8bar/", 0, 2, "png", 270, 160)]
+          ),
 
-            Project(
-              "Gr8bar",
-              "A cross-platform statusbar made with Python and Qt5",
-              "Made with Python and Qt5",
-              [
-                img({ src: "https://img.shields.io/github/stars/tsedlar/gr8bar.svg?logo=GitHub&label=&color=333333" })
-              ],
-              [Link("https://github.com/TSedlar/gr8bar", "GitHub", "fa-github-alt")],
-              ImageArray("./static/images/projects/gr8bar/", 0, 2, "png", 400, 240)
-            ),
+          Project(
+            "GridWM",
+            "A program used for desktop workspace organization",
+            "Made with Python and Qt5",
+            [
+              img({ src: "https://img.shields.io/github/stars/tsedlar/gridwm.svg?logo=GitHub&label=&color=333333" })
+            ],
+            [Link("https://github.com/TSedlar/GridWM", "GitHub", "fa-github-alt")],
+            [ImageArray("./static/images/projects/gridwm/", 0, 0, "gif", 270, 160)]
+          ),
 
-            Project(
-              "GridWM",
-              "A program used for desktop workspace organization",
-              "Made with Python and Qt5",
-              [
-                img({ src: "https://img.shields.io/github/stars/tsedlar/gridwm.svg?logo=GitHub&label=&color=333333" })
-              ],
-              [Link("https://github.com/TSedlar/GridWM", "GitHub", "fa-github-alt")],
-              ImageArray("./static/images/projects/gridwm/", 0, 0, "gif", 400, 240)
-            ),
-
-            Project(
-              "Javanalysis",
-              "A framework that improves analysis functionality of Javassist",
-              "Made with Kotlin",
-              [
-                img({ src: "https://img.shields.io/github/stars/disassemble-io/javanalysis.svg?logo=GitHub&label=&&color=333333" })
-              ],
-              [Link("https://github.com/disassemble-io/javanalysis", "GitHub", "fa-github-alt")],
-              [
-                p([
-                  "A medium post about Javanalysis can be seen ", 
-                  a({ href: "https://medium.com/@disassemble.io/javanalysis-4278d78c729c" }, [
-                    "here", i({ class: "fa fa-external-link" })
-                  ])
+          Project(
+            "Games Nebula",
+            "An unofficial Linux client for GOG",
+            "Made with Python",
+            [
+              img({ src: "https://img.shields.io/github/stars/yancharkin/games_nebula.svg?logo=GitHub&label=&color=333333" })
+            ],
+            [Link("https://github.com/yancharkin/games_nebula", "GitHub", "fa-github-alt")],
+            [
+              p([
+                "Helped with closing this ",
+                a({ href: "https://github.com/yancharkin/games_nebula/issues/38" }, [
+                  "issue", i({ class: "fa fa-external-link" })
                 ])
-              ]
-            ),
+              ]),
+              ImageArray("./static/images/projects/games-nebula/", 0, 2, "jpg", 270, 160)
+            ]
+          ),
 
-            Project(
-              "Games Nebula",
-              "An unofficial Linux client for GOG",
-              "Made with Python",
-              [
-                img({ src: "https://img.shields.io/github/stars/yancharkin/games_nebula.svg?logo=GitHub&label=&color=333333" })
-              ],
-              [Link("https://github.com/yancharkin/games_nebula", "GitHub", "fa-github-alt")],
-              [
-                p([
-                  "Helped with closing this ",
-                  a({ href: "https://github.com/yancharkin/games_nebula/issues/38" }, [
-                    "issue", i({ class: "fa fa-external-link" })
-                  ])
-                ]),
-                ...ImageArray("./static/images/projects/games-nebula/", 0, 2, "jpg", 500, 320)
-              ]
-            ),
-
-            Project(
-              "ElTag",
-              "A blazing fast HTML Tag Component Micro-framework",
-              "Made with JavaScript",
-              [
-                img({ src: "https://img.shields.io/github/stars/tsedlar/eltag.svg?logo=GitHub&label=&color=333333" })
-              ],
-              [Link("https://github.com/TSedlar/eltag", "GitHub", "fa-github-alt")],
-              [
-                p([
-                  "A codepen example can be seen ", 
-                  a({ href: "https://codepen.io/tsedlar/pen/MLzyPE?editors=1000" }, [
-                    "here", i({ class: "fa fa-external-link" })
-                  ])
+          Project(
+            "ElTag",
+            "A blazing fast HTML Tag Component Micro-framework",
+            "Made with JavaScript",
+            [
+              img({ src: "https://img.shields.io/github/stars/tsedlar/eltag.svg?logo=GitHub&label=&color=333333" })
+            ],
+            [Link("https://github.com/TSedlar/eltag", "GitHub", "fa-github-alt")],
+            [
+              p([
+                "A codepen example can be seen ",
+                a({ href: "https://codepen.io/tsedlar/pen/MLzyPE?editors=1000" }, [
+                  "here", i({ class: "fa fa-external-link" })
                 ])
-              ]
-            )
-          ])
+              ])
+            ]
+          )
         ])
       ])
+    ])
 
-      renderElement(document.body, view)
-    </script>
-    
-    <link rel="stylesheet" type="text/css" href="static/styles/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="static/styles/portfolio.css" />
-  </body>
+    renderElement(document.body, view)
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="static/styles/swiper.min.css" />
+  <script src="static/scripts/swiper.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/styles/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="static/styles/portfolio.css" />
+</body>
+
 </html>
