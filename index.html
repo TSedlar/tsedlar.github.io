@@ -96,9 +96,7 @@
 
                 for (let img of imgs) {
                   img.onclick = () => {
-                    const modalImage = document.getElementById("modal-image")
-                    modalImage.src = img.src
-                    showModal(true)
+                    window.location.href = img.previousSibling.srcset;
                   }
                 }
 
@@ -169,16 +167,7 @@
       ])
     }
 
-    const showModal = (showing) => {
-      const modal = document.getElementById("image-modal")
-      modal.style.display = showing ? "block" : "none"
-    }
-
     const view = div({ id: "content" }, [
-      div({ id: "image-modal", class: "modal", onclick: () => { showModal(false) } }, [
-        span({ class: "close", onclick: () => { showModal(false) }}, "x"),
-        img({ id: "modal-image", class: "modal-content"})
-      ]),
 
       div({ id: "cover", class: "header" }),
 
