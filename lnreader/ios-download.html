@@ -6,19 +6,54 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LNReader IPA</title>
+  <style>
+    :root {
+      --bg-color: #161a21;
+      --primary-color: #1d222c;
+      --fg-color: #dad8cc;
+      --fg-accent-color: #ffffff;
+      --fg-underline: rgba(255, 255, 255, 0.3);
+    }
+
+    body,
+    html {
+      height: 100%
+    }
+
+    body {
+      display: flex;
+      margin: 0;
+      flex-direction: column;
+      background-color: var(--bg-color);
+      text-align: center;
+    }
+
+    #content {
+      margin: auto;
+      font-size: 36px;
+      font-family: "Trebuchet MS", Helvetica, sans-serif;
+    }
+
+    #content a {
+      color: var(--fg-color);
+    }
+
+    #content a:hover {
+      color: var(--fg-accent-color);
+    }
+  </style>
 </head>
 
 <body>
-<div class="section hero">
-  <div class="container">
-    <div class="row">
-      <div class="one-half column">
-        <h5 class="">LNReader IPA Distribution</h6>
-        <a class="button button-primary" href="itms-services://?action=download-manifest&url=https://sedlar.me/lnreader/manifest.plist">Download Your App</a>
-      </div>
-    </div>
+  <div id="content">
+    <picture>
+      <source srcset="static/images/icon_foreground_1080.webp" type="image/webp">
+      <source srcset="static/images/icon_foreground_1080.png" type="image/png">
+      <img width="300" height="300">
+    </picture>
+    <br>
+    <a href="itms-services://?action=download-manifest&url=https://sedlar.me/lnreader/manifest.plist">Download LNReader</a>
   </div>
-</div>
 </body>
 
 </html>
