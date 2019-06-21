@@ -13,7 +13,7 @@
   <script src="../static/scripts/eltag.min.js"></script>
 
   <script>
-    const { renderElement, div, h1, img, span, p, h2, h3, ul, li, a, i, picture, source } = ElTag
+    const { renderElement, div, h1, img, span, p, h2, h3, ul, li, a, i, picture, source, br, button } = ElTag
 
     const aggregators = [
       {
@@ -162,6 +162,22 @@
       div({ class: 'header' }, [
         pngWebp('static/images/icon_foreground_1080', { width: 80, height: 80 }),
         span('LNReader'),
+      ]),
+
+      div({ id: 'downloads' }, [
+        a({ href: 'https://play.google.com/store/apps/details?id=me.sedlar.ln_reader' }, [
+          button([
+            i({ class: 'fa fa-android' }),
+            'Android Download'
+          ]),
+        ]),
+
+        a({ href: 'ios-download.html' }, [
+          button([
+            i({ class: 'fa fa-apple' }),
+            'iOS Download'
+          ]),
+        ]),
       ]),
 
       div({ id: 'content' }, [

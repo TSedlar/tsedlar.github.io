@@ -65,10 +65,50 @@
   .header span {
     font-size: 2.75em;
   }
+
+  #downloads {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    font-size: 1.325em;
+  }
+
+  #downloads button {
+    background: var(--primary-color);
+    color: var(--fg-color);
+    border: none;
+    outline: none;
+    padding: 12px;
+    text-indent: -5px;
+    font: inherit;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  #downloads a {
+    margin: 5px;
+  }
+
+  #downloads button:hover {
+    opacity: 0.8;
+  }
+
+  #downloads .fa {
+    width: 40px;
+    font-size: 30px;
+    margin-top: -3px;
+    margin-right: 8px;
+    vertical-align: middle;
+    text-align: center;
+  }
   
   #container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     justify-items: center;
