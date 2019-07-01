@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LNReader IPA</title>
+  <style>
+    :root {
+      --bg-color: #161a21;
+      --primary-color: #1d222c;
+      --fg-color: #dad8cc;
+      --fg-accent-color: #ffffff;
+      --fg-underline: rgba(255, 255, 255, 0.3);
+    }
+
+    body,
+    html {
+      height: 100%
+    }
+
+    body {
+      display: flex;
+      margin: 0;
+      flex-direction: column;
+      background-color: var(--bg-color);
+      text-align: center;
+    }
+
+    #content {
+      margin: auto;
+      font-size: 30px;
+      font-family: "Trebuchet MS", Helvetica, sans-serif;
+    }
+
+    #content a {
+      color: var(--fg-color);
+    }
+
+    #content a:hover {
+      color: var(--fg-accent-color);
+    }
+
+    #note {
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="content">
+    <picture>
+      <source srcset="static/images/icon_foreground_1080.webp" type="image/webp">
+      <source srcset="static/images/icon_foreground_1080.png" type="image/png">
+      <img width="250" height="250">
+    </picture>
+    <br>
+    <a href="https://github.com/TSedlar/LNReader/releases/tag/v1.0.2">Download 1.0.2 APK</a>
+    <br>
+  </div>
+</body>
+
+</html>
