@@ -121,7 +121,7 @@ function renderPdfToElement(url, container) {
 }
 
 var staticPdfURL = 'https://drive.google.com/uc?id=0B-ztd-OavKEuMGZ4WVFzdzgtbEU&export=download';
-staticPdfURL = 'snw.pdf';
+staticPdfURL = 'test.pdf';
 // renderPdfToElement(staticPdfURL, document.body);
 
 fetch(staticPdfURL)
