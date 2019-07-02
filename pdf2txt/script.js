@@ -120,13 +120,15 @@ function renderPdfToElement(url, container) {
   });
 }
 
-var staticPdfURL = 'https://drive.google.com/uc?id=0B-ztd-OavKEuMGZ4WVFzdzgtbEU&export=download';
-// staticPdfURL = 'test.pdf';
-// renderPdfToElement(staticPdfURL, document.body);
+var params = new URLSearchParams(window.location.search);
 
-fetch(staticPdfURL)
-  .then((res) => res.arrayBuffer())
-  .then((data) => {
-    renderPdfToElement(data, document.body);
-  })
-  .catch((err) => console.log(err));
+if (params.has('url')) {
+  fetch(params.get('url'))
+    .then((res) => res.arrayBuffer())
+    .then((data) => {
+      renderPdfToElement(data, document.body);
+    })
+    .catch((err) => document.write(err));
+} else {
+  document.write('url not found');
+}
