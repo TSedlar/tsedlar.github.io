@@ -149,7 +149,8 @@ if (params.has('url')) {
           "method":"POST",
           "mode":"cors"
         }).then((res) => {
-          window.location.href = res.url;
+//           window.location.href = res.url;
+          console.log(res.url);
         }).catch((err) => console.log(err));
       }
     })
