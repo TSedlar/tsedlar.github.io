@@ -123,10 +123,11 @@ function renderPdfToElement(url, container) {
 var params = new URLSearchParams(window.location.search);
 
 if (params.has('url')) {
+  var targetElement = document.querySelector('#pdfTxt');
   fetch(params.get('url'))
     .then((res) => res.arrayBuffer())
     .then((data) => {
-      renderPdfToElement(data, document.body);
+      renderPdfToElement(data, targetElement);
     })
     .catch((err) => document.write(err));
 } else {
