@@ -128,6 +128,7 @@ if (params.has('url')) {
     .then((res) => res.arrayBuffer())
     .then((data) => {
       renderPdfToElement(data, targetElement);
+      window.loadedPDF = true;
     })
     .catch((err) => document.write(err));
 } else {
