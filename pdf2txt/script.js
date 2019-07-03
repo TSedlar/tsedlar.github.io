@@ -127,32 +127,31 @@ if (params.has('url')) {
   fetch(params.get('url'))
     .then((res) => res.arrayBuffer())
     .then((data) => {
-      renderPdfToElement(data, targetElement);
-      if (params.has('send2kindle')) {
-        var content = targetElement.innerHTML;
-        var hastebinDocs = 'https://hastebin.com/documents';
-        var hastebinRaw = 'https://hastebin.com/raw/';
+      renderPdfToElement(data, targetElement).then(() => {
+        if (params.has('send2kindle')) {
+          var content = targetElement.innerHTML;
 
-        fetch("https://pastepad.fivefilters.org/post.php", {
-          "credentials":"omit",
-          "headers": {
-            "accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
-            "accept-language":"en-US,en;q=0.9",
-            "cache-control":"max-age=0",
-            "content-type":"application/x-www-form-urlencoded",
-            "upgrade-insecure-requests":"1",
-            "origin": "https://pastepad.fivefilters.org"
-          },
-          "referrer":"https://pastepad.fivefilters.org/",
-          "referrerPolicy":"no-referrer-when-downgrade",
-          "body": "body=" + encodeURIComponent(content),
-          "method":"POST",
-          "mode":"cors"
-        }).then((res) => {
-//           window.location.href = res.url;
-          console.log(res.url);
-        }).catch((err) => console.log(err));
-      }
+          fetch("https://pastepad.fivefilters.org/post.php", {
+            "credentials":"omit",
+            "headers": {
+              "accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
+              "accept-language":"en-US,en;q=0.9",
+              "cache-control":"max-age=0",
+              "content-type":"application/x-www-form-urlencoded",
+              "upgrade-insecure-requests":"1",
+              "origin": "https://pastepad.fivefilters.org"
+            },
+            "referrer":"https://pastepad.fivefilters.org/",
+            "referrerPolicy":"no-referrer-when-downgrade",
+            "body": "body=" + encodeURIComponent(content),
+            "method":"POST",
+            "mode":"cors"
+          }).then((res) => {
+  //           window.location.href = res.url;
+            console.log(res.url);
+          }).catch((err) => console.log(err));
+        }
+      }).catch((err) => console.log(err));
     })
     .catch((err) => document.write(err));
 } else {
