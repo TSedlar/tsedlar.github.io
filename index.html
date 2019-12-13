@@ -15,7 +15,88 @@
   <script>
     const { renderElement, div, img, picture, source, p, a, h4, i, span, ul, li, article, summary, details, br } = ElTag
 
-    let slideshowCount = 0;
+    let slideshowCount = 0
+
+    let defaultTheme = "night"
+    let useStored = false
+
+    if (localStorage && localStorage.theme) {
+      defaultTheme = localStorage.theme
+      if (defaultTheme !== "night" && defaultTheme !== "day") {
+        defaultTheme = "night"
+      } else {
+        useStored = true;
+      }
+    }
+
+    if (!useStored) {
+      const hours = new Date().getHours()
+      if (hours < 6 || hours > 19) {
+        defaultTheme = "night" // night mode between 7PM-6AM
+      } else {
+        defaultTheme = "day" // day mode between 7AM-6PM
+      }
+    }
+
+    const setTheme = (bg, txt, link, accent) => {
+      const root = document.documentElement;
+      root.style.setProperty("--background-color", bg)
+      root.style.setProperty("--text-color", txt)
+      root.style.setProperty("--link-color", link)
+      root.style.setProperty("--accent-color", accent)
+    }
+
+    const setDayTheme = (updateStorage = true) => {
+      setTheme("#ffffff", "#333333", "#000000", "#734957")
+      if (updateStorage) {
+        localStorage && (localStorage.theme = "day")
+      }
+    }
+
+    const setNightTheme = (updateStorage = true) => {
+      setTheme("#181a1b", "#cccccc", "#ffffff", "#a86459")
+      if (updateStorage) {
+        localStorage && (localStorage.theme = "night")
+      }
+    }
+
+    const NightModeToggle = () => div({
+      class: "night-toggle",
+      state: { theme: defaultTheme },
+      actions: {
+        toggleTheme: () => {
+          if (this.state.theme === "night") {
+            this.setState({ theme: "day" })
+          } else {
+            this.setState({ theme: "night" })
+          }
+        },
+        setTheme: (updateStorage = true) => {
+          if (this.state.theme == "night") {
+            setNightTheme(updateStorage)
+          } else {
+            setDayTheme(updateStorage)
+          }
+        }
+      },
+      oninit: () => this.actions.setTheme(false),
+      onclick: () => {
+        this.actions.toggleTheme()
+        this.actions.setTheme()
+      }
+    }, [
+      img({
+        every: {
+          100: () => {
+            if (this.parent.state.theme === "night") {
+              this.ref.src = "static/images/night-mode.png"
+            } else {
+              this.ref.src = "static/images/day-mode.png"
+            }
+          }
+        }
+      })
+    ])
 
     const Cert = (place, duration, location, gpa, name) => {
       return div([
@@ -168,8 +249,9 @@
     }
 
     const view = div({ id: "content" }, [
-
       div({ id: "cover", class: "header" }),
+
+      NightModeToggle(),
 
       div({ class: "avatar-container" }, [
         picture([
