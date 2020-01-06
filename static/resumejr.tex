@@ -1,0 +1,191 @@
+\documentclass[a4paper]{article}
+    \usepackage{fullpage}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{textcomp}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \usepackage[margin=1in]{geometry}
+    \usepackage{xcolor}
+    \usepackage{soul}
+    \usepackage{hyperref}
+    \hypersetup{
+        colorlinks=true,
+        linkcolor=blue,
+        filecolor=magenta,      
+        urlcolor=black,
+    }
+    \textheight=10in
+    \pagestyle{empty}
+    \raggedright
+
+\def\bull{\vrule height 0.8ex width .7ex depth -.1ex }
+
+% DEFINITIONS FOR RESUME %%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\area} [2] {
+    \vspace*{-9pt}
+    \begin{verse}
+        \textbf{#1}   #2
+    \end{verse}
+}
+
+\newcommand{\lineunder} {
+    \vspace*{-8pt} \\
+    \hspace*{-18pt} \hrulefill \\
+}
+
+\newcommand{\header} [1] {
+    {\hspace*{-18pt}\vspace*{6pt} {#1}}
+    \vspace*{-6pt} \lineunder
+}
+
+\newcommand{\employer} [3] {
+    { \textbf{#1} (#2)\\ \underline{\textbf{\emph{#3}}}\\  }
+}
+
+\newcommand{\contact} [3] {
+    \vspace*{-10pt}
+    \begin{center}
+        {\Huge \scshape {#1}}\\
+        #2 \\ #3
+    \end{center}
+    \vspace*{-8pt}
+}
+
+\newenvironment{achievements}{
+    \begin{list}
+        {$\bullet$}{\topsep 0pt \itemsep -2pt}}{\vspace*{4pt}
+    \end{list}
+}
+
+\newcommand{\schoolwithcourses} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+    \vspace*{5pt}
+}
+
+\newcommand{\school} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+}
+
+\renewcommand{\familydefault}{\sfdefault}
+% END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\vspace*{-40pt}
+\setul{}{0.25pt}
+\setulcolor{gray}
+
+%==== Profile ====%
+\vspace*{-10pt}
+\begin{center}
+	{\Huge {Tyler Sedlar}}\\
+	Chandler, AZ $\cdot$ \href{mailto:sedlarizona@gmail.com}{sedlarizona@gmail.com} $\cdot$ (480) 685-1959 $\cdot$ \href{https://sedlar.me/}{sedlar.me}\\
+\end{center}
+
+%==== Education ====%
+\header{Education}
+\textbf{Rio Salado College}\hfill Tempe, AZ\\
+AAS Mobile Application Programming \hfill 2018 - 2020\\
+\textit{3.67 \href{https://docs.google.com/spreadsheets/d/143DmVdsyjRVbH1ftcySxflvuNjioncAvJpj0vFbzpA8/edit?usp=sharing}{\ul{GPA}}, 3.9 in major}\\
+\vspace{2mm}
+\textbf{Rio Salado College}\hfill Tempe, AZ\\
+CCL Programming \& System Analysis \hfill 2018 - 2019\\
+\textit{3.9 \href{https://docs.google.com/spreadsheets/d/143DmVdsyjRVbH1ftcySxflvuNjioncAvJpj0vFbzpA8/edit?usp=sharing}{\ul{GPA}}}\\
+\vspace{2mm}
+
+%==== Experience ====%
+\header{Experience}
+\vspace{1mm}
+
+\textbf{Gold4Players LLC} \hfill Miami, FL\\
+\textit{Remote Full Stack Developer} \hfill 2013 - 2014\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+	\item Re-engineered Java bytecode for runtime reflection and proxying
+	\item Created a plugin repository web application with PHP
+	\item Managed plugins using MySQL and MySQL Workbench
+\end{itemize}
+\textbf{Dequeue Ltd} \hfill Holborn, London\\
+\textit{Remote Java Software Developer} \hfill 2010 - 2013\\
+\vspace{-1mm}
+\begin{itemize} \itemsep 1pt
+    \item Created automation logic scripts for an MMO
+	\item Published scripts to a centralized repository for public use
+	\item Fixed issues through a continuous public feedback forum
+\end{itemize}
+
+\header{Skills}
+\vspace{2mm}
+\begin{tabular}{ l l }
+	Programming Languages: & Java, Kotlin, JavaScript, NodeJS, Python, Dart, MySQL, PHP    \\
+	Frameworks:            & Flutter, ReactJS, Angular 2, Express, Mongoose, jQuery, Cordova
+	\vspace{0.5mm}\\
+	Tools:                 & Git, Maven, Gradle, MySQL Workbench, Atom, VSCode, IntelliJ
+	\vspace{0.5mm}\\
+	Typing:                & \href{https://data.typeracer.com/misc/badge?user=tsedlar}{\ul{Top 0.1\%}}, 113 WPM Average
+	\vspace{0.5mm}\\
+	Other:                 & PhotoShop CC 2019, Microsoft Office Suite 2016  \\
+\end{tabular}
+\vspace{2mm}
+
+\header{Projects}
+{\textbf{\href{https://sedlar.me/lnreader}{\ul{LNReader}}}}\\
+\vspace*{1mm}
+\begin{tabular}{ l l }
+    Description: & A mobile application used to read light novels\\
+    Frameworks:  & Dart, Flutter
+\end{tabular}\\
+\vspace*{2mm}
+
+{\textbf{\href{https://github.com/TSedlar/dokusho}{\ul{Dokusho}}}}\\
+\vspace*{1mm}
+\begin{tabular}{ l l }
+    Description: & A mobile application used to read Japanese comics\\
+    Frameworks:  & Dart, Flutter
+\end{tabular}\\
+\vspace*{2mm}
+
+{\textbf{\href{https://itunes.apple.com/us/app/learn-jp/id1447060691}{\ul{Learn JP}}}}\\
+\vspace*{1mm}
+\begin{tabular}{ l l }
+    Description: & A mobile application used to learn Japanese kana and kanji\\
+    Frameworks:  & Android, Kotlin
+\end{tabular}\\
+\vspace*{2mm}
+
+{\textbf{\href{https://github.com/TSedlar/anitrack}{\ul{Anitrack}}}}\\
+\vspace*{1mm}
+\begin{tabular}{ l l }
+    Description: & A web extension that syncs animated/comic media progress with 3rd party trackers\\
+    Frameworks:  & JavaScript, NodeJS
+\end{tabular}\\
+\vspace*{2mm}
+
+{\textbf{\href{https://github.com/TSedlar/gr8bar}{\ul{Gr8bar}}}}\\
+\vspace*{1mm}
+\begin{tabular}{ l l }
+    Description: & A cross-platform status bar widget\\
+    Frameworks:  & Python, Qt5
+\end{tabular}\\
+\vspace*{2mm}
+
+{\textbf{\href{https://github.com/FThompson/RuneDream-API}{\ul{RuneDream}}}}\\
+\vspace*{1mm}
+\begin{tabular}{ l l }
+    Description: & A defunct automation client for the MMORPG RuneScape that served 50,000\texttt{+} users\\
+    Frameworks:  & Java
+\end{tabular}\\
+\vspace*{2mm}
+
+{\textbf{\href{https://github.com/TSedlar/GridWM}{\ul{GridWM}}}}\\
+\vspace*{1mm}
+\begin{tabular}{ l l }
+    Description: & A program used to organize desktop workspace\\
+    Frameworks:  & Python, Qt5
+\end{tabular}\\
+\vspace*{2mm}
+
+\end{document}
