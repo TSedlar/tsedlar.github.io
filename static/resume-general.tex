@@ -1,0 +1,206 @@
+\documentclass[a4paper]{article}
+    \usepackage{fullpage}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{textcomp}
+    \usepackage[utf8]{inputenc}
+    \usepackage{pmboxdraw}
+    \usepackage[T1]{fontenc}
+    \usepackage[margin=1in]{geometry}
+    \usepackage{xcolor}
+    \usepackage{soul}
+    \usepackage{hyperref}
+    \hypersetup{
+        colorlinks=true,
+        linkcolor=blue,
+        filecolor=magenta,      
+        urlcolor=black,
+    }
+    \textheight=10in
+    \pagestyle{empty}
+    \raggedright
+
+\def\bull{\vrule height 0.8ex width .7ex depth -.1ex }
+
+% DEFINITIONS FOR RESUME %%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\area} [2] {
+    \vspace*{-9pt}
+    \begin{verse}
+        \textbf{#1}   #2
+    \end{verse}
+}
+
+\newcommand{\lineunder} {
+    \vspace*{-8pt} \\
+    \hspace*{-18pt} \hrulefill \\
+}
+
+\newcommand{\header} [1] {
+    {\hspace*{-18pt}\vspace*{6pt} {#1}}
+    \vspace*{-6pt} \lineunder
+}
+
+\newcommand{\subheader} [1] {
+    \hspace{2pt}
+    \textbf{
+        {\hspace*{-18pt}\vspace*{6pt} {#1}}
+        \vspace*{-6pt}
+    }
+    \\
+}
+
+\newcommand{\employer} [3] {
+    { \textbf{#1} (#2)\\ \underline{\textbf{\emph{#3}}}\\  }
+}
+
+\newcommand{\contact} [3] {
+    \vspace*{-10pt}
+    \begin{center}
+        {\Huge \scshape {#1}}\\
+        #2 \\ #3
+    \end{center}
+    \vspace*{-8pt}
+}
+
+\newenvironment{achievements}{
+    \begin{list}
+        {$\bullet$}{\topsep 0pt \itemsep -2pt}}{\vspace*{4pt}
+    \end{list}
+}
+
+\newcommand{\schoolwithcourses} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+    \vspace*{5pt}
+}
+
+\newcommand{\school} [4] {
+    \textbf{#1} #2 $\bullet$ #3\\
+    #4 \\
+}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+% END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+% \rmfamily
+\vspace*{-40pt}
+\setul{}{0.25pt}
+\setulcolor{gray}
+
+%==== Profile ====%
+\vspace*{-10pt}
+\begin{center}
+	{\Huge {Tyler Sedlar}}\\
+	Chandler, AZ $\cdot$ \href{mailto:sedlarizona@gmail.com}{sedlarizona@gmail.com} $\cdot$ (480) 685-1959 $\cdot$ \href{https://sedlar.me/}{sedlar.me}\\
+\end{center}
+
+%==== Bio ====%
+\header{Summary}
+A technology enthusiast who is a highly motivated and resourceful individual with the ability to multi-task, meets deadlines, think outside of the box, and enjoy learning.
+A hard-working individual with comprehensive knowledge of various languages in software development: Java, Kotlin, NodeJS, Python, and many others.
+Not a stranger to other computer related software: G Suite, Microsoft Office Suite, PhotoShop, and more.
+\vspace{2mm}
+
+%==== Education ====%
+\header{Education}
+\textbf{Rio Salado College}\hfill Tempe, AZ\\
+AAS Mobile Application Programming \hfill 2018 - 2020\\
+\textit{3.73 \href{https://docs.google.com/spreadsheets/d/143DmVdsyjRVbH1ftcySxflvuNjioncAvJpj0vFbzpA8/edit?usp=sharing}{\ul{GPA}}, 3.92 in major}\\
+
+\vspace{2mm}
+
+\textbf{Rio Salado College}\hfill Tempe, AZ\\
+CCL Programming \& System Analysis \hfill 2018 - 2019\\
+\textit{3.92 \href{https://docs.google.com/spreadsheets/d/143DmVdsyjRVbH1ftcySxflvuNjioncAvJpj0vFbzpA8/edit?usp=sharing}{\ul{GPA}}}\\
+\vspace{2mm}
+
+%==== Experience ====%
+\header{Experience}
+\vspace{1mm}
+
+\textbf{Gold4Players LLC} \hfill Miami, FL\\
+Remote Full Stack Developer \hfill 2013 - 2014\\
+\vspace{-3mm}
+\begin{itemize} \itemsep 1pt
+	\item Re-engineered Java bytecode for runtime reflection and proxying
+	\vspace{-1mm}
+	\item Created a plugin repository web application with PHP
+	\vspace{-1mm}
+	\item Managed plugins using MySQL and MySQL Workbench
+\end{itemize}
+
+\vspace{-2mm}
+
+\textbf{Dequeue Ltd} \hfill Holborn, London\\
+Remote Java Software Developer \hfill 2010 - 2013\\
+\vspace{-3mm}
+\begin{itemize} \itemsep 1pt
+    \item Created automation logic scripts for an MMO
+    \vspace{-1mm}
+	\item Published scripts to a centralized repository for public use
+	\vspace{-1mm}
+	\item Fixed issues through a continuous public feedback forum
+\end{itemize}
+
+%==== Skills ====%
+\header{Skills}
+\vspace{2mm}
+\begin{tabular}{ l l }
+    \subheader{Software Development}
+    \hspace{-3mm}
+	Languages:      & Java, Kotlin, JavaScript, NodeJS, Python, Dart, MySQL, PHP    \\
+    \hspace{-3mm}
+	Frameworks:     & Flutter, ReactJS, Angular 2, Express, Mongoose, jQuery, Maven, Gradle \\
+    \hspace{-3mm}
+	Tools:          & Git, MySQL Workbench, VSCode, IntelliJ, Android Studio, Visual Studio
+	\vspace{1mm}\\
+    \subheader{Computer Literacy}
+    \hspace{-3mm}
+	Platforms:  & Windows 10, Mac OS X, Linux (Debian, Arch) \\
+    \hspace{-3mm}
+	Software:   & G Suite, Microsoft Office Suite 2016, PhotoShop CC 2019  \\
+    \hspace{-3mm}
+	Typing:     & \href{https://data.typeracer.com/misc/badge?user=tsedlar}{\ul{Top 0.1\%}}, 113 WPM Average \\
+\end{tabular}
+\vspace*{2mm}
+
+%==== Projects ====%
+\header{Projects}
+{\textbf{\href{https://github.com/TSedlar/InvoiceOrganizer}{\ul{Invoice Organizer}}}} \hfill January 2020 \\
+\vspace{1mm}
+A program created for a family member who works for a small business. \hfill Kotlin \\ 
+This program automatically organizes image files scanned into a document feeder. \\
+\vspace*{1mm}
+
+{\textbf{\href{https://sedlar.me/lnreader}{\ul{LNReader}}}} \hfill July 2019 \\
+\vspace*{1mm}
+A cross-platform mobile application created for myself to aid a personal hobby. \hfill Flutter \\
+It is used to read online light novels, wuxia and xianxia.
+\vspace*{1mm}
+
+{\textbf{\href{https://github.com/TSedlar/anitrack}{\ul{Anitrack}}}} \hfill June 2019 \\
+\vspace*{1mm}
+A web extension created for an online community interested in Asian media. \hfill NodeJS \\
+It is used to track animated/comic media from various online sources.
+\vspace*{1mm}
+
+{\textbf{\href{https://github.com/TSedlar/VirtualDesktopBar}{\ul{Virtual Desktop Bar}}}} \hfill October 2019 \\
+\vspace*{1mm}
+A Rainmeter widget created to enhance interaction with Windows 10 virtual desktops. \hfill Lua \\
+It is used for visual clarity of which virtual desktop the user is visiting. \\
+It also displays which desktops are available.
+\vspace*{1mm}
+
+{\textbf{\href{https://github.com/TSedlar/gr8bar}{\ul{Gr8bar}}}} \hfill November 2017 \\
+\vspace*{1mm}
+A status bar created for an online community that customizes Linux desktop environments. \hfill Python \\
+It is used to display information graphically at all times. \\
+It can be seen as an alternative to i3 or lemonbar.
+\vspace*{1mm}
+
+\vspace*{2mm}
+
+\end{document}
