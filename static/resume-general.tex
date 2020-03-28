@@ -9,6 +9,7 @@
     \usepackage[margin=1in]{geometry}
     \usepackage{xcolor}
     \usepackage{soul}
+    \usepackage{xpatch}
     \usepackage{hyperref}
     \hypersetup{
         colorlinks=true,
@@ -80,6 +81,15 @@
     #4 \\
 }
 
+\newcommand{\textslash}{/}
+\makeatletter
+\DeclareRobustCommand{\textslashsc}{%
+  \check@mathfonts
+  {\fontsize{\sf@size}{\z@}\selectfont/}%
+}
+\xapptocmd{\scshape}{\let\textslash\textslashsc}{}{}
+\makeatother
+
 \renewcommand{\familydefault}{\sfdefault}
 
 % END RESUME DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%
@@ -94,7 +104,7 @@
 \vspace*{-10pt}
 \begin{center}
 	{\Huge {Tyler Sedlar}}\\
-	Chandler, AZ $\cdot$ \href{mailto:sedlarizona@gmail.com}{sedlarizona@gmail.com} $\cdot$ (480) 685-1959 $\cdot$ \href{https://sedlar.me/}{sedlar.me}\\
+	\href{https://sedlar.me/}{https:\raisebox{1.1pt}{\textsc{\textbf{\textslash \textslash}}}sedlar.me} $\cdot$ \href{mailto:sedlarizona@gmail.com}{sedlarizona@gmail.com} $\cdot$ (480) 685-1959 $\cdot$ Chandler, AZ\\
 \end{center}
 
 %==== Bio ====%
@@ -113,7 +123,7 @@ AAS Mobile Application Programming \hfill 2018 - 2020\\
 \vspace{2mm}
 
 \textbf{Rio Salado College}\hfill Tempe, AZ\\
-CCL Programming \& System Analysis \hfill 2018 - 2019\\
+Certificate in Programming \& System Analysis \hfill 2018 - 2019\\
 \textit{3.92 \href{https://docs.google.com/spreadsheets/d/143DmVdsyjRVbH1ftcySxflvuNjioncAvJpj0vFbzpA8/edit?usp=sharing}{\ul{GPA}}}\\
 \vspace{2mm}
 
@@ -121,8 +131,12 @@ CCL Programming \& System Analysis \hfill 2018 - 2019\\
 \header{Experience}
 \vspace{1mm}
 
-\textbf{Gold4Players LLC} \hfill Miami, FL\\
-Remote Full Stack Developer \hfill 2013 - 2014\\
+I worked the following positions remotely while in high school for 20 hours per week.
+
+\vspace{1mm}
+
+\textbf{Gold4Players LLC} \hfill Remote\\
+Full Stack Developer \hfill 2013 - 2014\\
 \vspace{-3mm}
 \begin{itemize} \itemsep 1pt
 	\item Re-engineered Java bytecode for runtime reflection and proxying
@@ -134,13 +148,14 @@ Remote Full Stack Developer \hfill 2013 - 2014\\
 
 \vspace{-2mm}
 
-\textbf{Dequeue Ltd} \hfill Holborn, London\\
-Remote Java Software Developer \hfill 2010 - 2013\\
-\vspace{-3mm}
+\textbf{Dequeue Ltd} \hfill Remote\\
+Java Software Developer \hfill 2010 - 2013\\
+% \vspace{-3mm}
+\vspace{-2.5mm}
 \begin{itemize} \itemsep 1pt
-    \item Created automation logic scripts for an MMO
+    \item Created applications for a user-facing video game client
     \vspace{-1mm}
-	\item Published scripts to a centralized repository for public use
+	\item Published applications to a centralized repository for public use
 	\vspace{-1mm}
 	\item Fixed issues through a continuous public feedback forum
 \end{itemize}
@@ -169,6 +184,12 @@ Remote Java Software Developer \hfill 2010 - 2013\\
 
 %==== Projects ====%
 \header{Projects}
+{\textbf{\href{https://github.com/TSedlar/MIDI-Mapper}{\ul{MIDI Mapper}}}} \hfill March 2020 \\
+\vspace{1mm}
+A desktop application that lets you create mappings and macros for MIDI devices. \hfill Kotlin \\ 
+Supports controlling streaming software and display visual mappings for some devices. \\
+\vspace*{1mm}
+
 {\textbf{\href{https://github.com/TSedlar/InvoiceOrganizer}{\ul{Invoice Organizer}}}} \hfill January 2020 \\
 \vspace{1mm}
 A program created for a family member who works for a small business. \hfill Kotlin \\ 
@@ -177,28 +198,19 @@ This program automatically organizes image files scanned into a document feeder.
 
 {\textbf{\href{https://sedlar.me/lnreader}{\ul{LNReader}}}} \hfill July 2019 \\
 \vspace*{1mm}
-A cross-platform mobile application created for myself to aid a personal hobby. \hfill Flutter \\
-It is used to read online light novels, wuxia and xianxia.
+A cross-platform mobile application that lets you read and bookmark online light novels. \hfill Flutter \\
+Supports content from 9 websites and customization for accessibility.
 \vspace*{1mm}
 
 {\textbf{\href{https://github.com/TSedlar/anitrack}{\ul{Anitrack}}}} \hfill June 2019 \\
 \vspace*{1mm}
-A web extension created for an online community interested in Asian media. \hfill NodeJS \\
-It is used to track animated/comic media from various online sources.
-\vspace*{1mm}
-
-{\textbf{\href{https://github.com/TSedlar/VirtualDesktopBar}{\ul{Virtual Desktop Bar}}}} \hfill October 2019 \\
-\vspace*{1mm}
-A Rainmeter widget created to enhance interaction with Windows 10 virtual desktops. \hfill Lua \\
-It is used for visual clarity of which virtual desktop the user is visiting. \\
-It also displays which desktops are available.
+A browser extension that lets you track progress in animated/comic media. \hfill NodeJS \\
+Supports tracking media on 25 websites.
 \vspace*{1mm}
 
 {\textbf{\href{https://github.com/TSedlar/gr8bar}{\ul{Gr8bar}}}} \hfill November 2017 \\
 \vspace*{1mm}
-A status bar created for an online community that customizes Linux desktop environments. \hfill Python \\
-It is used to display information graphically at all times. \\
-It can be seen as an alternative to i3 or lemonbar.
+A cross-platform desktop status bar displays your computer's performance statistics \hfill Python \\ and other information in an easy-to-read, aesthetically pleasing display. \\
 \vspace*{1mm}
 
 \vspace*{2mm}
