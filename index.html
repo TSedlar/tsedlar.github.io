@@ -134,12 +134,42 @@
       return a({ href: link }, children)
     }
 
+    const DetailLink = (link, name, details) => {
+      var detailArray = []
+
+      if (Array.isArray(details)) {
+        for (let detail of details) {
+          detailArray.push(detail)
+          detailArray.push(br())
+          detailArray.push(br())
+        }
+      } else {
+        detailArray.push(details)
+        detailArray.push(br())
+        detailArray.push(br())
+      }
+
+      return a({ href: link,}, [
+        span({ style: { textDecoration: 'underline' } }, name),
+        br(), 
+        ...detailArray
+      ])
+    }
+
     const Project = (name, summaryText, detailText, top, links, detailChildren) => {
       let linkArray = [...top]
       if (linkArray.length > 0) {
         linkArray.push(br())
       }
-      if (links && links.length > 0) {
+
+      // Large list of links
+      if (top.length === 0 && detailChildren.length === 0) {
+        let items = []
+        for (let link of links) {
+          items.push(li([link]))
+        }
+        linkArray.push(ul(items))
+      } else if (links && links.length > 0) { // Simple link list
         linkArray.push("Links: ")
         for (let i = 0; i < links.length; i++) {
           if (i > 0) {
@@ -148,6 +178,7 @@
           linkArray.push(links[i])
         }
       }
+
       let detailArray = []
       if (detailChildren && detailChildren.length > 0) {
         detailArray = detailChildren
@@ -324,6 +355,19 @@
           h4("Projects"),
 
           Project(
+            "Calibre Viewer",
+            "A mobile application used to view and download a Calibre library",
+            "Made with Kotlin",
+            [
+              img({ src: "https://img.shields.io/github/stars/tsedlar/CalibreViewer.svg?logo=GitHub&label=&color=333333" })
+            ],
+            [
+              Link("https://github.com/TSedlar/CalibreViewer", "GitHub", "fa-github-alt")
+            ],
+            [ImageArray("./static/images/projects/calibre-viewer/", 1, 7, "png", 270, 480)]
+          ),
+
+          Project(
             "LNReader",
             "A flutter application for reading novels",
             "Made with Dart and Flutter",
@@ -339,14 +383,14 @@
           ),
 
           Project(
-            "Dokusho",
-            "A flutter application for reading manga",
-            "Made with Dart and Flutter",
+            "WoW Classic Prices",
+            "A web application for viewing item prices on World of Warcraft Classic",
+            "Made with NodeJS (React, Material-UI)",
             [
-              img({ src: "https://img.shields.io/github/stars/tsedlar/dokusho.svg?logo=GitHub&label=&color=333333" })
+              img({ src: "https://img.shields.io/github/stars/tsedlar/wow-classic-prices.svg?logo=GitHub&label=&color=333333" })
             ],
-            [Link("https://github.com/TSedlar/dokusho", "GitHub", "fa-github-alt")],
-            [ImageArray("./static/images/projects/dokusho/", 0, 3, "png", 270, 480)]
+            [Link("https://github.com/TSedlar/wow-classic-prices", "GitHub", "fa-github-alt")],
+            [ImageArray("./static/images/projects/wow-classic-prices/", 0, 0, "png", 270, 480)]
           ),
 
           Project(
@@ -431,6 +475,77 @@
                 ])
               ])
             ]
+          ),
+
+          Project(
+            "Miscellaneous",
+            "Other projects that I've authored, co-authored, or contributed to!",
+            "",
+            [],
+            [
+              DetailLink(
+                "https://github.com/TSedlar/MIDI-Mapper", 
+                "MIDI Mapper", 
+                "A desktop application used to program MIDI buttons to computer actions"
+              ),
+              DetailLink(
+                "https://github.com/TSedlar/FolioReader-Android", 
+                "FolioReader (Android)", 
+                "A fork of FolioReader that adds additional theming and font selection"
+              ),
+              DetailLink(
+                "https://github.com/TSedlar/InvoiceOrganizer", 
+                "Invoice Organizer", 
+                [
+                  "A desktop application used to pre-fill data within a physical print scanner for backup purposes",
+                  "Utilizes OpenCV and Tesseract OCR"
+                ]
+              ),
+              DetailLink(
+                "https://github.com/TSedlar/BlueStacksBot", 
+                "BlueStacks Bot", 
+                "An application that wraps the BlueStacks Android emulator for automation purposes"
+              ),
+              DetailLink(
+                "https://github.com/TSedlar/eltag",
+                "Calibre OPDS Parser",
+                "A Kotlin library used to interact with Calibre OPDS output"
+              ),
+              DetailLink(
+                "https://github.com/TSedlar/scoop-frontend", 
+                "Scoop Frontend", 
+                [
+                  "A webapp used to search through packages listed on the scoop package manager.",
+                  "Uses GitHub Actions to automate package listing retrieval"
+                ]
+              ),
+              DetailLink(
+                "https://github.com/TSedlar/OSRS-Clue-Hint", 
+                "OSRS Clue Hint", 
+                "An Android application used to view data to help solve virtual treasure hunts on the MMO Old School RuneScape"
+              ),
+              DetailLink(
+                "https://github.com/TSedlar/pseudo-styler", 
+                "Pseudo:Styler", 
+                "A JavaScript library that allows for forcing an element to be styled with a pseudo-class."
+              ),
+              DetailLink(
+                "https://github.com/TSedlar/helpkit.rs", 
+                "RS HelpKit", 
+                "A client that wraps the game client of the MMO Old School RuneScape and provides additional user-made plugins"
+              ),
+              DetailLink(
+                "https://github.com/TSedlar/wavenet-audiobook", 
+                "WaveNet AudioBook", 
+                "Converts text files to audio files using Google's WaveNet Text-To-Speech library"
+              ),
+              DetailLink(
+                "https://github.com/TSedlar/vsc-jvm-build-menu", 
+                "VSC JVM Build Menu", 
+                "A VSCode extension that simplifies building modules leading to simpler and more accurate linting."
+              )
+            ],
+            []
           )
         ])
       ])
