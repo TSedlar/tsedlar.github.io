@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="https://unpkg.com/vue@3.2.45/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{message}}</h1>
+    <ul>
+      <li v-for="link in links">
+        <a :href="link.href">{{ link.label }}</a>
+      </li>
+    </ul>
+  </div>
+  <script type="module">
+    Vue.createApp({
+      data() {
+        return {
+          message: 'List of links:',
+          links: [
+            { label: "Link one", href: "https://dzone.com/articles/dzones-article-submission-guidelines" },
+            { label: "Link two", href: "https://dzone.com/articles/yard-sticking-the-top-50-automl-platforms-to-look" },
+            { label: "Link three", href: "https://dzone.com/articles/steps-of-the-machine-learning-life-cycle" }
+          ],
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>
